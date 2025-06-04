@@ -1,26 +1,36 @@
 /* -------------------------------------
    1. html, body 必須設為 height:100%，
       讓子元素可用百分比高度計算。
+   同時加上紙張底色與質感圖片。
+   文字顏色改為 #0B1013，字型用明朝體。
 ------------------------------------- */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
+  /* 底色 */
+  background-color: #E1A679;
+  /* 紙張質感圖 (請將你的圖片放在 assets/img/paper-texture.jpg) */
+  background-image: url('assets/img/paper-texture.jpg');
+  background-repeat: repeat;
+  /* 文字預設深色 #0B1013，字型預設為細明體/新細明體 */
+  color: #0B1013;
+  font-family: "PMingLiU", "MingLiU", serif;
 }
 
 /* -------------------------------------
    2. body 設為 flex container，垂直 (column) 排列。
-   - header 高度固定 40px，不會縮放。
+   - header 固定高 40px，不會縮放。
    - .main-content 會自動填滿剩餘空間 (flex:1)。
 ------------------------------------- */
 body {
   display: flex;
   flex-direction: column;
-  font-family: "PMingLiU", Arial, sans-serif;
 }
 
 /* -------------------------------------
    3. header 固定高 40px，flex-shrink:0 保持不被縮小。
+   文字色也改為 #0B1013。
 ------------------------------------- */
 header {
   height: 40px;
@@ -31,10 +41,11 @@ header {
   flex-shrink: 0; /* 不可被縮小 */
   display: flex;
   align-items: center;
+  color: #0B1013;
 }
 header a.back {
   font-size: 14px;
-  color: #2C3E50;
+  color: #0B1013;
   text-decoration: none;
   margin-right: 8px;
 }
@@ -46,6 +57,7 @@ header a.back:hover {
    4. main-content 區域使用 flex:1，填滿剩餘空間。
    - position: relative 方便讓 iframe 以絕對定位填滿。
    - overflow: hidden 避免出現捲動軸溢位。
+   - 確保背景下方依舊能看到紙張質感。
 ------------------------------------- */
 .main-content {
   flex: 1;
@@ -68,7 +80,7 @@ header a.back:hover {
 
 /* -------------------------------------
    6. 當 iframe 載入失敗 (onerror) 時，顯示 .warning 區域。
-   - .warning 用絕對定位置中。
+   - .warning 用絕對定位置中，文字同樣 #0B1013。
 ------------------------------------- */
 .warning {
   display: none; /* 初始隱藏 */
@@ -78,12 +90,12 @@ header a.back:hover {
   transform: translate(-50%, -50%);
   text-align: center;
   font-size: 18px;
-  color: #2C3E50;
+  color: #0B1013;
   z-index: 10;
 }
 .warning a {
   text-decoration: none;
-  color: #2C3E50;
+  color: #0B1013;
 }
 .warning a:hover {
   text-decoration: underline;
