@@ -8,7 +8,6 @@ html, body {
   height: 100%;
   /* 底色 + 半透明紙張質感 */
   background-color: #E1A679;
-  /* 不直接在這裡放質感圖，改由偽元素處理透明度 */
   color: #0B1013;
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
 }
@@ -20,8 +19,8 @@ body::before {
   width: 100%;
   height: 100%;
   background: url('assets/img/paper-texture.jpg') repeat;
-  opacity: 0.3;   /* 30% 透明度 */
-  z-index: -1;
+  opacity: 0.3; /* 30% 透明度 */
+  z-index: 1;
 }
 .container {
   max-width: 960px;
@@ -47,11 +46,6 @@ p {
   font-size: 1rem;
   color: #0B1013;
 }
-/* 圖示連結文字的 underline 樣式 */
-a.link-underline {
-  color: #0B1013;
-  text-decoration: underline;
-}
 
 /* ========= 主要區塊：左右 Flex 分欄 ========= */
 .flex-container {
@@ -65,24 +59,13 @@ a.link-underline {
   }
 }
 
-/* ----- 左側按鈕區 ----- */
-.left-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
+/* ----- 按鈕共用樣式，改色由父面板決定 ----- */
 .button-link {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px 0;
-  background: linear-gradient(90deg, #00c4cc, #008b91);
-  color: #fff; /* 按鈕文字維持白色 */
+  color: #fff; /* 按鈕文字為白色 */
   text-decoration: none;
   font-size: 1.125rem;
   border-radius: 6px;
@@ -93,13 +76,35 @@ a.link-underline {
   margin-right: 8px;
   font-size: 1.2rem;
 }
-.button-link:hover {
-  background: linear-gradient(90deg, #029499, #006f73);
+/* 左側父面板的按鈕顏色：#43341B */
+.left-panel .button-link {
+  background-color: #43341B;
+}
+.left-panel .button-link:hover {
+  background-color: #2E2515;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-/* ----- 右側：PDF 第一頁預覽區 ----- */
+/* 右側父面板的按鈕顏色：#954A45 */
+.right-panel .button-link {
+  background-color: #954A45;
+}
+.right-panel .button-link:hover {
+  background-color: #6F3637;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ----- 左側按鈕區 ----- */
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ----- 右側 PDF 第一頁預覽區 ----- */
 .right-panel {
   flex: 1;
   display: flex;
@@ -139,43 +144,6 @@ a.link-underline {
   color: #0B1013;
   background-color: #f1f3f5;
   text-align: center;
-}
-
-/* ========= （可選）舊有 PDF 列表 ========= */
-.pdf-list {
-  margin-top: 40px;
-  list-style: none;
-  padding: 0;
-  border-top: 1px solid #dee2e6;
-}
-.pdf-list li {
-  padding: 16px 0;
-  border-bottom: 1px solid #dee2e6;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.pdf-list li:last-child {
-  border-bottom: none;
-}
-.pdf-list .text-link {
-  font-size: 1rem;
-  color: #0B1013;
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-.pdf-list .text-link:hover {
-  color: #005f6a;
-  text-decoration: underline;
-}
-.pdf-list .icon {
-  margin-left: 8px;
-  font-size: 1.2rem;
-  color: #0B1013;
-  transition: color 0.2s ease;
-}
-.pdf-list .text-link:hover + .icon {
-  color: #005f6a;
 }
 
 /* ========= Footer ========= */
