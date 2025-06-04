@@ -5,19 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Interactive PDF A：112101520 郭宜瑄-遊戲（可操作）</title>
   <style>
-    /* 1. html, body 100% 高度，讓子元素百分比有效 */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
     }
-    /* 2. body 用 Flexbox 分隔 header + main-content */
     body {
       display: flex;
       flex-direction: column;
       font-family: "PMingLiU", Arial, sans-serif;
     }
-    /* 3. header 固定高 40px */
     header {
       height: 40px;
       line-height: 40px;
@@ -37,20 +34,19 @@
     header a.back:hover {
       text-decoration: underline;
     }
-    /* 4. main-content 撐滿剩餘高度 */
     .main-content {
       flex: 1;
       position: relative;
       overflow: hidden;
     }
-    /* 5. <embed> 或 <object> 撐滿整個 main-content */
-    .main-content embed,
-    .main-content object {
+    .main-content iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none;
     }
-    /* 6. 若瀏覽器不支援嵌入，就顯示提示 */
     .warning {
       display: none;
       position: absolute;
@@ -80,23 +76,18 @@
   </header>
 
   <div class="main-content">
-    <!-- 使用 <embed> 並加上 #zoom=page-width -->
-    <embed
-      src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-width"
-      type="application/pdf"
+    <iframe
+      src="https://docs.google.com/gview?embedded=true&url=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-fit"
+      width="100%"
+      height="100%"
+      style="border:none;"
       onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
-    >
-    <!-- 如果 <embed> 失敗，改用 <object> -->
-    <object
-      data="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-width"
-      type="application/pdf"
-      onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
-    >
-      <div class="warning">
-        此瀏覽器無法內嵌 PDF，請
-        <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>觀看。
-      </div>
-    </object>
+    ></iframe>
+
+    <div class="warning">
+      此瀏覽器無法內嵌 PDF，請
+      <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>觀看。
+    </div>
   </div>
 
 </body>
