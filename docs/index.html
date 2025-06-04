@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>1132 Interactive Showcase</title>
   <style>
-    /* ======================
-       基本 Reset & Container
-    ====================== */
+    /* ===== 基本 Reset & Container ===== */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,25 +13,23 @@
     }
     html, body {
       height: 100%;
-      background-color: #f8f9fa; /* 微微灰白背景 */
-      font-family: "PMingLiU", Arial, sans-serif;
+      background-color: #f8f9fa; /* 微灰背景 */
+      font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
       color: #333;
-      line-height: 1.6;
     }
     .container {
-      max-width: 960px; /* 最大寬度，避免拉太寬 */
+      max-width: 960px;
       margin: 0 auto;
-      padding: 40px 20px; /* 上下左右留白 */
+      padding: 40px 20px;
     }
 
-    /* ======================
-       標題與段落排版
-    ====================== */
+    /* ===== 標題排版 ===== */
     h1 {
       font-size: 2.5rem;
       font-weight: bold;
       margin-bottom: 16px;
       color: #212529;
+      text-align: center;
     }
     h2 {
       font-size: 1.5rem;
@@ -46,26 +42,41 @@
       color: #555;
     }
 
-    /* ======================
-       按鈕樣式
-    ====================== */
+    /* ===== 主要區塊：Grid 分左右 ===== */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr; /* 手機/窄螢幕改為單欄 */
+      }
+    }
+
+    /* ===== 左側：按鈕區 ===== */
     .button-container {
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin-bottom: 48px;
     }
     .button-link {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 16px 0;
       background: linear-gradient(90deg, #00c4cc, #008b91);
       color: #fff;
       text-decoration: none;
       font-size: 1.125rem;
-      text-align: center;
       border-radius: 6px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
       transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .button-link span.icon {
+      margin-right: 8px;
+      font-size: 1.2rem;
     }
     .button-link:hover {
       background: linear-gradient(90deg, #029499, #006f73);
@@ -73,12 +84,36 @@
       transform: translateY(-2px);
     }
 
-    /* ======================
-       PDF 列表樣式
-    ====================== */
+    /* ===== 右側：PDF 預覽區 ===== */
+    .preview-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .pdf-preview {
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      overflow: hidden;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .pdf-preview iframe {
+      width: 100%;
+      height: 200px; /* 固定高度，顯示第一頁縮圖 */
+      border: none;
+    }
+    .pdf-preview .caption {
+      padding: 8px 12px;
+      font-size: 0.95rem;
+      color: #555;
+      background-color: #f1f3f5;
+      text-align: center;
+    }
+
+    /* ===== PDF 清單（保留如有需求） ===== */
     .pdf-list {
+      margin-top: 40px;
       list-style: none;
-      margin-top: 24px;
       padding: 0;
       border-top: 1px solid #dee2e6;
     }
@@ -112,22 +147,14 @@
       color: #005f6a;
     }
 
-    /* ======================
-       響應式：縮小螢幕時調整按鈕字級
-    ====================== */
-    @media (max-width: 576px) {
-      h1 {
-        font-size: 2rem;
-      }
-      .button-link {
-        font-size: 1rem;
-      }
-      .pdf-list .text-link {
-        font-size: 0.95rem;
-      }
-      .pdf-list .icon {
-        font-size: 1rem;
-      }
+    /* ===== Footer ===== */
+    footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
     }
   </style>
 </head>
@@ -136,59 +163,92 @@
     <!-- 主標題 -->
     <h1>歡迎來到 1132 Interactive Showcase</h1>
 
-    <!-- 互動連結區 -->
-    <h2>三個外部互動連結</h2>
-    <p>點擊下方任一按鈕，即可在新分頁開啟互動內容。</p>
-    <div class="button-container">
-      <a
-        class="button-link"
-        href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
-        target="_blank"
-        rel="noopener"
-      >
-        開啟 Canva 互動簡報
-      </a>
-      <a
-        class="button-link"
-        href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
-        target="_blank"
-        rel="noopener"
-      >
-        開啟 ooopenlab Quiz
-      </a>
-      <a
-        class="button-link"
-        href="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527"
-        target="_blank"
-        rel="noopener"
-      >
-        開啟 Genially 互動內容
-      </a>
+    <!-- 左右 Grid 分欄 -->
+    <div class="grid-container">
+      <!-- 左側按鈕區：共 4 個按鈕 -->
+      <div>
+        <h2>四個外部互動連結</h2>
+        <p>按下按鈕即可在新分頁開啟互動內容：</p>
+        <div class="button-container">
+          <!-- 1. Canva 互動簡報 -->
+          <a
+            class="button-link"
+            href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">🎨</span>開啟 Canva 互動簡報
+          </a>
+          <!-- 2. ooopenlab Quiz -->
+          <a
+            class="button-link"
+            href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">📝</span>開啟 ooopenlab Quiz
+          </a>
+          <!-- 3. Genially 互動內容 -->
+          <a
+            class="button-link"
+            href="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">🔗</span>開啟 Genially 互動內容
+          </a>
+          <!-- 4. A Split Second 網頁 -->
+          <a
+            class="button-link"
+            href="https://a-split-second.my.canva.site/"
+            target="_blank"
+            rel="noopener"
+          >
+            <span class="icon">🌐</span>開啟 A Split Second 網站
+          </a>
+        </div>
+      </div>
+
+      <!-- 右側：單一 PDF 預覽 -->
+      <div>
+        <h2>一份可操作 PDF 預覽</h2>
+        <p>示意下方第一頁縮圖：</p>
+        <div class="preview-container">
+          <!-- 這裡只留 PDF A 的第一頁預覽作示意 -->
+          <div class="pdf-preview">
+            <iframe
+              src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#page=1&zoom=75"
+              title="112101520 郭宜瑄-遊戲（可操作） 第一頁預覽"
+            ></iframe>
+            <div class="caption">
+              112101520 郭宜瑄 - 遊戲（可操作）第一頁預覽
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 可操作 PDF 區 -->
-    <h2>兩份可操作 PDF（在線上嵌入顯示）</h2>
-    <p>點擊檔名可在線上檢視並互動：</p>
+    <!-- （可選）舊有的 PDF 列表，若想保留可直接點列表檢視內嵌 -->
+    <h2>或點列表在線上嵌入檢視：</h2>
     <ul class="pdf-list">
       <li>
-        <a
-          class="text-link"
-          href="page4.html"
-          target="_blank"
+        <a class="text-link" href="page4.html" target="_blank"
           >112101520 郭宜瑄 - 遊戲（可操作）</a
         >
         <span class="icon">📄</span>
       </li>
       <li>
-        <a
-          class="text-link"
-          href="page5.html"
-          target="_blank"
+        <a class="text-link" href="page5.html" target="_blank"
           >112101524 - 遊戲（可操作）</a
         >
         <span class="icon">📄</span>
       </li>
     </ul>
+
+    <!-- Footer -->
+    <footer>
+      © 2025 Taoyi Chiang. All rights reserved.
+    </footer>
   </div>
 </body>
 </html>
