@@ -3,17 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive PDF A：112101520 郭宜瑄-遊戲（可操作）</title>
+  <title>112101520 郭宜瑄-遊戲（可操作）</title>
   <style>
-    html, body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
     }
-    body {
+    html, body {
+      height: 100%;
+      background-color: #f8f9fa;
+      font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
+      color: #333;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
-      font-family: "PMingLiU", Arial, sans-serif;
+      height: 100%;
     }
     header {
       height: 40px;
@@ -24,6 +33,7 @@
       flex-shrink: 0;
       display: flex;
       align-items: center;
+      border-radius: 4px;
     }
     header a.back {
       font-size: 14px;
@@ -34,10 +44,15 @@
     header a.back:hover {
       text-decoration: underline;
     }
+    /* 看到下方 .main-content 會撐滿剩餘全部 */
     .main-content {
       flex: 1;
       position: relative;
+      margin-top: 24px;
       overflow: hidden;
+      border: 1px solid #dee2e6;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     .main-content iframe {
       position: absolute;
@@ -66,26 +81,44 @@
     .warning a:hover {
       text-decoration: underline;
     }
+    /* Footer */
+    footer {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid #dee2e6;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #777;
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a class="back" href="index.html">← 返回首頁</a>
+      <span>112101520 郭宜瑄 - 遊戲（可操作）</span>
+    </header>
 
-  <header>
-    <a class="back" href="index.html">← 返回首頁</a>
-    <span>Page 4：112101520 郭宜瑄-遊戲（可操作）</span>
-  </header>
-
-  <div class="main-content">
-    <iframe
-      src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-fit"
-      allowfullscreen
-    ></iframe>
-
-    <div class="warning">
-      此瀏覽器無法內嵌 PDF，請
-      <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>觀看。
+    <!-- 內嵌 PDF A -->
+    <div class="main-content">
+      <iframe
+        src="https://docs.google.com/gview?
+             embedded=true&
+             url=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-fit"
+        allowfullscreen
+        onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
+      ></iframe>
+      <div class="warning">
+        此瀏覽器無法內嵌 PDF，請
+        <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>觀看。
+      </div>
     </div>
-  </div>
 
+    <!-- Footer -->
+    <footer>
+      © 2025 郭宜瑄. All rights reserved.
+    </footer>
+  </div>
 </body>
 </html>
