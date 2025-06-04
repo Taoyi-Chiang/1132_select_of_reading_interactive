@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Interactive PDF A：112101520 郭宜瑄-遊戲（可操作）</title>
   <style>
+    /* 1. html, body 設 100% 高度，讓子元素百分比顯示生效 */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
     }
+    /* 2. 使用 Flexbox 分隔 header + main-content */
     body {
       display: flex;
       flex-direction: column;
       font-family: "PMingLiU", Arial, sans-serif;
     }
+    /* 3. header 高度固定 40px */
     header {
       height: 40px;
       line-height: 40px;
@@ -34,19 +37,20 @@
     header a.back:hover {
       text-decoration: underline;
     }
+    /* 4. main-content 佔剩餘高度 */
     .main-content {
       flex: 1;
       position: relative;
-      overflow: hidden;
+      overflow: hidden;  /* 如果內部有多餘，隱藏 */
     }
-    .main-content iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    /* 5. <embed> 填滿整個 main-content，百分比寬高 */
+    .main-content embed,
+    .main-content object {
       width: 100%;
       height: 100%;
       border: none;
     }
+    /* 6. 當瀏覽器不支援 embed，顯示 warning */
     .warning {
       display: none;
       position: absolute;
@@ -69,21 +73,35 @@
   </style>
 </head>
 <body>
+
   <header>
     <a class="back" href="index.html">← 返回首頁</a>
     <span>Page 4：112101520 郭宜瑄-遊戲（可操作）</span>
   </header>
 
   <div class="main-content">
-    <iframe
+    <!-- 
+      直接用 <embed>，src 後面加上 #zoom=page-fit
+      瀏覽器會嘗試用內建 PDF Viewer（Chrome/Firefox/Edge）載入並自動符合可見高度。
+    -->
+    <embed
       src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-fit"
-      onerror="document.querySelector('.main-content iframe').style.display='none'; document.querySelector('.warning').style.display='block';"
-    ></iframe>
-
-    <div class="warning">
-      此瀏覽器不支援內嵌 PDF，請
-      <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>。
-    </div>
+      type="application/pdf"
+      onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
+    >
+    <!-- 如果 <embed> 失敗，改用 <object> 來載入 PDF -->
+    <object
+      data="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#zoom=page-fit"
+      type="application/pdf"
+      onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
+    >
+      <!-- 最後備用：顯示下載連結 -->
+      <div class="warning">
+        此瀏覽器不支援內嵌 PDF，請
+        <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">點此下載</a>。
+      </div>
+    </object>
   </div>
+
 </body>
 </html>
