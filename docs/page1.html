@@ -2,48 +2,61 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>Page 1：Canva 互動設計</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive PDF A：112101520 郭宜瑄-遊戲（可操作）</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
     }
-    #iframe-container {
-      width: 100%;
-      height: calc(100vh - 40px); /* 留 40px 給最上方的工具列或標題 */
-      border: none;
-    }
     header {
       height: 40px;
       line-height: 40px;
       background-color: #f2f2f2;
       padding-left: 16px;
-      font-family: "PMingLiU", "Arial", sans-serif;
+      font-family: "PMingLiU", Arial, sans-serif;
       font-size: 16px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
     }
-    a.back {
+    header a.back {
       font-size: 14px;
       color: #2C3E50;
       text-decoration: none;
       margin-left: 16px;
     }
-    a.back:hover {
+    header a.back:hover {
       text-decoration: underline;
+    }
+    #pdf-frame {
+      position: absolute;
+      top: 40px; /* 頭部高度 */
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      border: none;
     }
   </style>
 </head>
 <body>
   <header>
-    <span>Page 1：Canva 互動設計</span>
     <a class="back" href="index.html">← 返回首頁</a>
+    112101520 郭宜瑄-遊戲（可操作）
   </header>
 
   <iframe
-    id="iframe-container"
-    src="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
-    frameborder="0"
-    allowfullscreen
-  ></iframe>
+    id="pdf-frame"
+    src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf"
+  >
+    此瀏覽器不支援內嵌 PDF，請
+    <a href="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf" target="_blank">
+      點擊此處下載
+    </a>
+    。
+  </iframe>
 </body>
 </html>
