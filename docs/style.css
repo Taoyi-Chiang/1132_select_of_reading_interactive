@@ -6,7 +6,7 @@
 }
 html, body {
   height: 100%;
-  background-color: #E1A679; /* 底色，自動在最底層 */
+  background-color: #E1A679;
   color: #0B1013;
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
 }
@@ -14,16 +14,17 @@ html, body {
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   background: url('assets/img/paper-texture.jpg') repeat;
-  opacity: 0.3; /* 30% 透明度 */
-  z-index: -1;  /* 放到所有 DOM 內容之下 */
+  opacity: 0.3; /* 半透明 */
+  z-index: 1;  /* 直接放到最底层 */
 }
 
+/* 让 container 在伪元素之上 */
 .container {
+  position: relative;
+  z-index: 2; /* ≥0 即可位于伪元素之上 */
   max-width: 960px;
   margin: 0 auto;
   padding: 40px 20px;
