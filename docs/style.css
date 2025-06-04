@@ -6,16 +6,12 @@
 ------------------------------------- */
 html, body {
   height: 100%;
-  /* 底色＋質感圖 */
   background-color: #E1A679;
-  background-image: url('assets/img/paper-texture.jpg');
-  background-repeat: repeat;
-
-  /* 改用正黑體 */
+  /* 先只留底色，不直接放質感圖 */
+  background-image: none;
   color: #0B1013;
-  font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
+  font-family: "PMingLiU", "MingLiU", serif;
 }
-
 body::before {
   content: "";
   position: fixed;
@@ -23,8 +19,8 @@ body::before {
   width: 100%;
   height: 100%;
   background: url('assets/img/paper-texture.jpg') repeat;
-  opacity: 0.3;
-  z-index: -1;
+  opacity: 0.3; /* 30% 透明度 */
+  z-index: -1;  /* 放最底層 */
 }
 
 /* -------------------------------------
