@@ -5,28 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Interactive PDF B：112101524-遊戲（可操作）</title>
   <style>
-    /* 1. html 與 body 都設為 100% 高度，才能讓子元素百分比高度生效 */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
     }
-
-    /* 2. 將 body 設為 flex container，將畫面分為 header + main-content */
     body {
       display: flex;
       flex-direction: column;
       font-family: "PMingLiU", Arial, sans-serif;
     }
-
-    /* 3. header 固定高度 40px，不會隨螢幕高度縮放 */
     header {
       height: 40px;
       line-height: 40px;
       background-color: #f2f2f2;
       padding-left: 16px;
       font-size: 16px;
-      flex-shrink: 0;      /* 在 flex 排列中保持 40px 高 */
+      flex-shrink: 0;
       display: flex;
       align-items: center;
     }
@@ -39,25 +34,13 @@
     header a.back:hover {
       text-decoration: underline;
     }
-
-    /* 4. main-content 區域會佔滿剩餘可見高度 */
     .main-content {
-      flex: 1;             /* 佔下方所有剩餘空間 */
-      position: relative;  /* 方便讓 embed/object 絕對定位填滿 */
-      overflow: hidden;    /* 若內部超出，也不會跑出滾動條到父元素 */
+      flex: 1;
+      position: relative;
+      overflow: hidden;
     }
-
-    /* 5. embed 與 object 都填滿整個 .main-content */
-    .main-content embed,
-    .main-content object {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* 6. 當瀏覽器不支援 embed 或 object 時，顯示 warning 提示 */
     .warning {
-      display: none;       /* 預設隱藏 */
+      display: none;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -75,39 +58,35 @@
     .warning a:hover {
       text-decoration: underline;
     }
+    /* 這裡改成直接用 <iframe> 撐滿 */
+    .main-content iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 固定在最上方的 Header -->
   <header>
     <a class="back" href="index.html">← 返回首頁</a>
     <span>Page 5：112101524-遊戲（可操作）</span>
   </header>
 
-  <!-- 佔滿剩餘空間的主要內容 -->
   <div class="main-content">
-    <!-- 
-      先使用 <embed> 載入 PDF，後面加上 #zoom=page-width
-      讓 PDF 的真實紙張寬度撐滿 embed 寬度，高度則按比例延伸，使用者需上下捲動查看。
-    -->
-    <embed
-      src="assets/pdf/112101524-遊戲（可操作）.pdf#zoom=page-width"
-      type="application/pdf"
-      onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
-    >
-    <!-- 如果 <embed> 失敗（或瀏覽器不支援），改用 <object> -->
-    <object
-      data="assets/pdf/112101524-遊戲（可操作）.pdf#zoom=page-width"
-      type="application/pdf"
-      onerror="this.style.display='none'; document.querySelector('.warning').style.display='block';"
-    >
-      <!-- 最後備用：顯示下載連結 -->
-      <div class="warning">
-        此瀏覽器無法內嵌 PDF，請
-        <a href="assets/pdf/112101524-遊戲（可操作）.pdf" target="_blank">點此下載</a>觀看。
-      </div>
-    </object>
+    <iframe
+      src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101524-遊戲（可操作）.pdf#zoom=page-fit"
+      allowfullscreen
+    ></iframe>
+
+    <!-- 若 iframe 失敗，顯示提示用戶下載 -->
+    <div class="warning">
+      此瀏覽器無法內嵌 PDF，請
+      <a href="assets/pdf/112101524-遊戲（可操作）.pdf" target="_blank">點此下載</a>。
+    </div>
   </div>
 
 </body>
