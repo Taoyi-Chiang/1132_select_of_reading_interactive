@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Page 2：ooopenlab Quiz</title>
   <style>
     html, body {
@@ -10,45 +10,57 @@
       padding: 0;
       height: 100%;
     }
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: "PMingLiU", Arial, sans-serif;
+    }
     header {
       height: 40px;
       line-height: 40px;
       background-color: #f2f2f2;
       padding-left: 16px;
-      font-family: "PMingLiU", Arial, sans-serif;
       font-size: 16px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
     header a.back {
       font-size: 14px;
       color: #2C3E50;
       text-decoration: none;
-      margin-left: 16px;
+      margin-right: 8px;
     }
     header a.back:hover {
       text-decoration: underline;
     }
-    #iframe-container {
+    .main-content {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    .main-content iframe {
       position: absolute;
-      top: 40px;
+      top: 0;
       left: 0;
       width: 100%;
-      bottom: 0;
+      height: 100%;
       border: none;
     }
     .warning {
       display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
-      margin-top: 100px;
-      font-family: "PMingLiU", Arial, sans-serif;
+      font-size: 18px;
+      color: #2C3E50;
+      z-index: 10;
     }
     .warning a {
-      color: #2C3E50;
       text-decoration: none;
+      color: #2C3E50;
       font-size: 18px;
     }
     .warning a:hover {
@@ -59,22 +71,20 @@
 <body>
   <header>
     <a class="back" href="index.html">← 返回首頁</a>
-    Page 2：ooopenlab Quiz
+    <span>Page 2：ooopenlab Quiz</span>
   </header>
 
-  <iframe
-    id="iframe-container"
-    src="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
-    frameborder="0"
-    allowfullscreen
-    onerror="document.getElementById('iframe-container').style.display='none'; document.querySelector('.warning').style.display='block';"
-  ></iframe>
+  <div class="main-content">
+    <iframe
+      src="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
+      allowfullscreen
+      onerror="document.querySelector('.main-content iframe').style.display='none'; document.querySelector('.warning').style.display='block';"
+    ></iframe>
 
-  <div class="warning">
-    此平台無法在 iframe 中顯示，請
-    <a href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA" target="_blank">
-      點此於新分頁開啟
-    </a>。
+    <div class="warning">
+      此平台無法在 iframe 中顯示，請
+      <a href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA" target="_blank">點此新分頁開啟</a>。
+    </div>
   </div>
 </body>
 </html>

@@ -1,0 +1,90 @@
+/* -------------------------------------
+   1. html, body 必須設為 height:100%，
+      讓子元素可用百分比高度計算。
+------------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* -------------------------------------
+   2. body 設為 flex container，垂直 (column) 排列。
+   - header 高度固定 40px，不會縮放。
+   - .main-content 會自動填滿剩餘空間 (flex:1)。
+------------------------------------- */
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "PMingLiU", Arial, sans-serif;
+}
+
+/* -------------------------------------
+   3. header 固定高 40px，flex-shrink:0 保持不被縮小。
+------------------------------------- */
+header {
+  height: 40px;
+  line-height: 40px;
+  background-color: #f2f2f2;
+  padding-left: 16px;
+  font-size: 16px;
+  flex-shrink: 0; /* 不可被縮小 */
+  display: flex;
+  align-items: center;
+}
+header a.back {
+  font-size: 14px;
+  color: #2C3E50;
+  text-decoration: none;
+  margin-right: 8px;
+}
+header a.back:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------
+   4. main-content 區域使用 flex:1，填滿剩餘空間。
+   - position: relative 方便讓 iframe 以絕對定位填滿。
+   - overflow: hidden 避免出現捲動軸溢位。
+------------------------------------- */
+.main-content {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* -------------------------------------
+   5. 讓 iframe 撐滿 .main-content 的寬高。
+   - position: absolute; top:0; left:0; width:100%; height:100%;
+------------------------------------- */
+.main-content iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* -------------------------------------
+   6. 當 iframe 載入失敗 (onerror) 時，顯示 .warning 區域。
+   - .warning 用絕對定位置中。
+------------------------------------- */
+.warning {
+  display: none; /* 初始隱藏 */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 18px;
+  color: #2C3E50;
+  z-index: 10;
+}
+.warning a {
+  text-decoration: none;
+  color: #2C3E50;
+}
+.warning a:hover {
+  text-decoration: underline;
+}

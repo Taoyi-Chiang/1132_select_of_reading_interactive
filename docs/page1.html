@@ -1,62 +1,103 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Page 1：Canva 互動連結</title>
   <style>
+    /* 1. html, body 設為 100% 高 */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
     }
+
+    /* 2. body 變成 flex container，垂直排列 */
+    body {
+      display: flex;
+      flex-direction: column;
+      font-family: "PMingLiU", Arial, sans-serif;
+    }
+
+    /* 3. header 固定高 40px，不會縮放 */
     header {
       height: 40px;
       line-height: 40px;
       background-color: #f2f2f2;
       padding-left: 16px;
-      font-family: "PMingLiU", Arial, sans-serif;
       font-size: 16px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 10;
+      flex-shrink: 0; /* 不會因為 flex 撐縮 */
+      display: flex;
+      align-items: center;
     }
     header a.back {
       font-size: 14px;
       color: #2C3E50;
       text-decoration: none;
-      margin-left: 16px;
+      margin-right: 8px;
     }
     header a.back:hover {
       text-decoration: underline;
     }
-    #iframe-container {
+
+    /* 4. main-content 填滿剩餘空間 */
+    .main-content {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 5. iframe 佔滿 .main-content */
+    .main-content iframe {
       position: absolute;
-      top: 40px;
+      top: 0;
       left: 0;
       width: 100%;
-      bottom: 0;
+      height: 100%;
       border: none;
+    }
+
+    /* 6. 若 iframe 載入失敗，就顯示提示 */
+    .warning {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 18px;
+      color: #2C3E50;
+      z-index: 10;
+    }
+    .warning a {
+      text-decoration: none;
+      color: #2C3E50;
+    }
+    .warning a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <header>
     <a class="back" href="index.html">← 返回首頁</a>
-    Page 1：Canva 互動連結
+    <span>Page 1：Canva 互動連結</span>
   </header>
 
-  <iframe
-    id="iframe-container"
-    src="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
-  >
-    此瀏覽器不支援內嵌 iframe，請
-    <a href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
-       target="_blank">
-      點此於新分頁開啟
-    </a>。
-  </iframe>
+  <div class="main-content">
+    <iframe
+      src="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
+      allowfullscreen
+      onerror="document.querySelector('.main-content iframe').style.display='none'; document.querySelector('.warning').style.display='block';"
+    ></iframe>
+
+    <div class="warning">
+      此平台無法在 iframe 中顯示，請
+      <a
+        href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
+        target="_blank"
+      >點此於新分頁開啟</a>。
+    </div>
+  </div>
 </body>
 </html>
