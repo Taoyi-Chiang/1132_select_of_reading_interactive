@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>1132 Interactive Showcase</title>
   <style>
     body {
@@ -13,6 +13,26 @@
     h1 {
       margin-bottom: 24px;
     }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .button-link {
+      display: inline-block;
+      padding: 16px 32px;
+      background-color: #00C4CC;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      border-radius: 4px;
+      text-align: center;
+      transition: background-color 0.2s ease;
+    }
+    .button-link:hover {
+      background-color: #029499;
+    }
     ul {
       list-style: none;
       padding: 0;
@@ -20,12 +40,12 @@
     li {
       margin-bottom: 12px;
     }
-    a {
+    a.text-link {
       color: #2C3E50;
       text-decoration: none;
       font-size: 18px;
     }
-    a:hover {
+    a.text-link:hover {
       text-decoration: underline;
     }
   </style>
@@ -34,16 +54,41 @@
   <h1>歡迎來到 1132 Interactive Showcase</h1>
 
   <p>三個外部互動連結：</p>
-  <ul>
-    <li><a href="page1.html" target="_blank">Page 1：Canva 互動連結</a></li>
-    <li><a href="page2.html" target="_blank">Page 2：ooopenlab Quiz</a></li>
-    <li><a href="page3.html" target="_blank">Page 3：Genially 互動內容</a></li>
-  </ul>
+  <div class="button-container">
+    <a
+      class="button-link"
+      href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
+      target="_blank"
+      rel="noopener"
+    >
+      開啟 Canva 互動簡報
+    </a>
+    <a
+      class="button-link"
+      href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
+      target="_blank"
+      rel="noopener"
+    >
+      開啟 ooopenlab Quiz
+    </a>
+    <a
+      class="button-link"
+      href="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527"
+      target="_blank"
+      rel="noopener"
+    >
+      開啟 Genially 互動內容
+    </a>
+  </div>
 
   <p>兩份可操作 PDF（在線上嵌入顯示）：</p>
   <ul>
-    <li><a href="page4.html" target="_blank">線上檢視 112101520 郭宜瑄-遊戲（可操作）</a></li>
-    <li><a href="page5.html" target="_blank">線上檢視 112101524-遊戲（可操作）</a></li>
+    <li>
+      <a class="text-link" href="page4.html" target="_blank">線上檢視 112101520 郭宜瑄-遊戲（可操作）</a>
+    </li>
+    <li>
+      <a class="text-link" href="page5.html" target="_blank">線上檢視 112101524-遊戲（可操作）</a>
+    </li>
   </ul>
 </body>
 </html>
