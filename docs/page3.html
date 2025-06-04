@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Interactive PDF B：112101524-遊戲（可操作）</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page 3：Genially 互動內容</title>
   <style>
     html, body {
       margin: 0;
@@ -32,7 +32,7 @@
     header a.back:hover {
       text-decoration: underline;
     }
-    #pdf-frame {
+    #iframe-container {
       position: absolute;
       top: 40px;
       left: 0;
@@ -40,23 +40,41 @@
       bottom: 0;
       border: none;
     }
+    .warning {
+      display: none;
+      text-align: center;
+      margin-top: 100px;
+      font-family: "PMingLiU", Arial, sans-serif;
+    }
+    .warning a {
+      color: #2C3E50;
+      text-decoration: none;
+      font-size: 18px;
+    }
+    .warning a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <header>
     <a class="back" href="index.html">← 返回首頁</a>
-    112101524-遊戲（可操作）
+    Page 3：Genially 互動內容
   </header>
 
   <iframe
-    id="pdf-frame"
-    src="assets/pdf/112101524-遊戲（可操作）.pdf"
-  >
-    此瀏覽器不支援內嵌 PDF，請
-    <a href="assets/pdf/112101524-遊戲（可操作）.pdf" target="_blank">
-      點擊此處下載
-    </a>
-    。
-  </iframe>
+    id="iframe-container"
+    src="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527"
+    frameborder="0"
+    allowfullscreen
+    onerror="document.getElementById('iframe-container').style.display='none'; document.querySelector('.warning').style.display='block';"
+  ></iframe>
+
+  <div class="warning">
+    此平台無法在 iframe 中顯示，請
+    <a href="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527" target="_blank">
+      點此於新分頁開啟
+    </a>。
+  </div>
 </body>
 </html>
