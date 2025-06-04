@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>1132 Interactive Showcase</title>
   <style>
-    /* ===== 基本 Reset & Container ===== */
+    /* ========= 基本 Reset & Container ========= */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -13,9 +13,13 @@
     }
     html, body {
       height: 100%;
-      background-color: #f8f9fa; /* 微灰背景 */
-      font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
-      color: #333;
+      /* 紙張背景：底色 + 紙張質感圖重複 */
+      background-color: #E1A679; 
+      background-image: url('assets/img/paper-texture.jpg');
+      background-repeat: repeat;
+      /* 文字顏色改為深色 #0B1013，字型改用明朝體 */
+      color: #0B1013;
+      font-family: "PMingLiU", "MingLiU", serif;
     }
     .container {
       max-width: 960px;
@@ -23,39 +27,43 @@
       padding: 40px 20px;
     }
 
-    /* ===== 標題排版 ===== */
+    /* ========= 標題 + 說明排版 ========= */
     h1 {
       font-size: 2.5rem;
       font-weight: bold;
       margin-bottom: 16px;
-      color: #212529;
+      color: #0B1013;    /* 文字同樣用深色 */
       text-align: center;
     }
     h2 {
       font-size: 1.5rem;
-      margin-bottom: 12px;
-      color: #495057;
+      margin-bottom: 8px;
+      color: #0B1013;
     }
     p {
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       font-size: 1rem;
-      color: #555;
+      color: #0B1013;
     }
 
-    /* ===== 主要區塊：Grid 分左右 ===== */
-    .grid-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    /* ========= 主要區塊：左右 Flex 分欄 ========= */
+    .flex-container {
+      display: flex;
       gap: 32px;
       margin-bottom: 48px;
     }
     @media (max-width: 768px) {
-      .grid-container {
-        grid-template-columns: 1fr; /* 手機/窄螢幕改為單欄 */
+      .flex-container {
+        flex-direction: column; /* 窄螢幕時改為直列 */
       }
     }
 
-    /* ===== 左側：按鈕區 ===== */
+    /* ----- 左側按鈕區 ----- */
+    .left-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
     .button-container {
       display: flex;
       flex-direction: column;
@@ -67,7 +75,7 @@
       justify-content: center;
       padding: 16px 0;
       background: linear-gradient(90deg, #00c4cc, #008b91);
-      color: #fff;
+      color: #fff;               /* 按鈕文字保持白色 */
       text-decoration: none;
       font-size: 1.125rem;
       border-radius: 6px;
@@ -84,33 +92,51 @@
       transform: translateY(-2px);
     }
 
-    /* ===== 右側：PDF 預覽區 ===== */
-    .preview-container {
+    /* ----- 右側：PDF 第一頁預覽區 ----- */
+    .right-panel {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+    }
+    /* 讓標題 + 說明佔高度後，預覽框自動撐滿剩餘 */
+    .preview-container-wrapper {
+      display: flex;
+      flex-direction: column;
+      flex: 1;               /* 撐滿右側剩餘空間 */
+    }
+    .preview-container-wrapper > h2,
+    .preview-container-wrapper > p {
+      margin-bottom: 8px;
+    }
+    .preview-container {
+      flex: 1;               /* 撐滿除標題＋說明以外的所有高度 */
+      display: flex;
     }
     .pdf-preview {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       border: 1px solid #dee2e6;
       border-radius: 4px;
       overflow: hidden;
-      background-color: #fff;
+      background-color: #fff; /* 白色背景，與紙張有對比 */
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
     .pdf-preview iframe {
+      /* iframe 填滿剩餘高度 */
+      flex: 1;
       width: 100%;
-      height: 200px; /* 固定高度，顯示第一頁縮圖 */
       border: none;
     }
     .pdf-preview .caption {
       padding: 8px 12px;
       font-size: 0.95rem;
-      color: #555;
+      color: #0B1013;
       background-color: #f1f3f5;
       text-align: center;
     }
 
-    /* ===== PDF 清單（保留如有需求） ===== */
+    /* ========= （可選）舊有 PDF 列表 ========= */
     .pdf-list {
       margin-top: 40px;
       list-style: none;
@@ -129,7 +155,7 @@
     }
     .pdf-list .text-link {
       font-size: 1rem;
-      color: #007b8f;
+      color: #0B1013;
       text-decoration: none;
       transition: color 0.2s ease;
     }
@@ -140,21 +166,21 @@
     .pdf-list .icon {
       margin-left: 8px;
       font-size: 1.2rem;
-      color: #007b8f;
+      color: #0B1013;
       transition: color 0.2s ease;
     }
     .pdf-list .text-link:hover + .icon {
       color: #005f6a;
     }
 
-    /* ===== Footer ===== */
+    /* ========= Footer ========= */
     footer {
       margin-top: 60px;
       padding-top: 20px;
       border-top: 1px solid #dee2e6;
       text-align: center;
       font-size: 0.9rem;
-      color: #777;
+      color: #0B1013;
     }
   </style>
 </head>
@@ -163,14 +189,13 @@
     <!-- 主標題 -->
     <h1>歡迎來到 1132 Interactive Showcase</h1>
 
-    <!-- 左右 Grid 分欄 -->
-    <div class="grid-container">
-      <!-- 左側按鈕區：共 4 個按鈕 -->
-      <div>
+    <!-- 左右 Flex 分欄 -->
+    <div class="flex-container">
+      <!-- 左側：四個按鈕區 -->
+      <div class="left-panel">
         <h2>四個外部互動連結</h2>
         <p>按下按鈕即可在新分頁開啟互動內容：</p>
         <div class="button-container">
-          <!-- 1. Canva 互動簡報 -->
           <a
             class="button-link"
             href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
@@ -179,7 +204,6 @@
           >
             <span class="icon">🎨</span>開啟 Canva 互動簡報
           </a>
-          <!-- 2. ooopenlab Quiz -->
           <a
             class="button-link"
             href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
@@ -188,7 +212,6 @@
           >
             <span class="icon">📝</span>開啟 ooopenlab Quiz
           </a>
-          <!-- 3. Genially 互動內容 -->
           <a
             class="button-link"
             href="https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527"
@@ -197,7 +220,6 @@
           >
             <span class="icon">🔗</span>開啟 Genially 互動內容
           </a>
-          <!-- 4. A Split Second 網頁 -->
           <a
             class="button-link"
             href="https://a-split-second.my.canva.site/"
@@ -209,36 +231,43 @@
         </div>
       </div>
 
-      <!-- 右側：單一 PDF 預覽 -->
-      <div>
-        <h2>一份可操作 PDF 預覽</h2>
-        <p>示意下方第一頁縮圖：</p>
-        <div class="preview-container">
-          <!-- 這裡只留 PDF A 的第一頁預覽作示意 -->
-          <div class="pdf-preview">
-            <iframe
-              src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#page=1&zoom=75"
-              title="112101520 郭宜瑄-遊戲（可操作） 第一頁預覽"
-            ></iframe>
-            <div class="caption">
-              112101520 郭宜瑄 - 遊戲（可操作）第一頁預覽
+      <!-- 右側：單一 PDF 第一頁預覽，撐滿左側高度 -->
+      <div class="right-panel">
+        <div class="preview-container-wrapper">
+          <h2>PDF 第一頁預覽</h2>
+          <p>示意下方第一頁縮圖 (縮放以全寬顯示)：</p>
+          <div class="preview-container">
+            <div class="pdf-preview">
+              <iframe
+                src="assets/pdf/112101520郭宜瑄-遊戲（可操作）.pdf#page=1&zoom=75"
+                title="112101520 郭宜瑄-遊戲（可操作） 第一頁預覽"
+              ></iframe>
+              <div class="caption">
+                112101520 郭宜瑄 - 遊戲（可操作）第一頁預覽
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- （可選）舊有的 PDF 列表，若想保留可直接點列表檢視內嵌 -->
+    <!-- （可選）舊有的可操作 PDF 列表 -->
     <h2>或點列表在線上嵌入檢視：</h2>
     <ul class="pdf-list">
       <li>
-        <a class="text-link" href="page4.html" target="_blank"
+        <a
+          class="text-link"
+          href="page4.html"
+          target="_blank"
           >112101520 郭宜瑄 - 遊戲（可操作）</a
         >
         <span class="icon">📄</span>
       </li>
       <li>
-        <a class="text-link" href="page5.html" target="_blank"
+        <a
+          class="text-link"
+          href="page5.html"
+          target="_blank"
           >112101524 - 遊戲（可操作）</a
         >
         <span class="icon">📄</span>
