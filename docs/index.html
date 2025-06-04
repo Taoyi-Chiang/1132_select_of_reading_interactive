@@ -2,45 +2,64 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <title>1132 Interactive Showcase</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page 1：Canva 互動簡報 (外部開啟)</title>
   <style>
-    body {
-      font-family: "PMingLiU", "Arial", sans-serif;
-      margin: 40px;
-      line-height: 1.6;
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "PMingLiU", Arial, sans-serif;
+      background-color: #fafafa;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     h1 {
-      margin-bottom: 24px;
+      margin-bottom: 20px;
+      font-size: 24px;
     }
-    ul {
-      list-style: none;
-      padding: 0;
+    p {
+      margin-bottom: 40px;
+      font-size: 16px;
     }
-    li {
-      margin-bottom: 12px;
-    }
-    a {
-      color: #2C3E50;
+    a.button {
+      display: inline-block;
+      padding: 12px 24px;
+      background-color: #00C4CC;
+      color: white;
       text-decoration: none;
       font-size: 18px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
     }
-    a:hover {
+    a.button:hover {
+      background-color: #029499;
+    }
+    a.back {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-size: 14px;
+      color: #2C3E50;
+      text-decoration: none;
+    }
+    a.back:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>歡迎來到 1132 歷代文選及習作 互動式課程成果</h1>
-  <p>互動網頁：</p>
-  <ul>
-    <li><a href="page1.html" target="_blank">Page 1：Canva 互動設計</a></li>
-    <li><a href="page2.html" target="_blank">Page 2：ooopenlab Quiz</a></li>
-    <li><a href="page3.html" target="_blank">Page 3：Genially 互動內容</a></li>
-  </ul>
-  <p>互動簡報</p>
-  <ul>
-    <li><a href="page1.html" target="_blank">線上觀看 Interactive Presentation A</a></li>
-    <li><a href="page3.html" target="_blank">線上觀看 Interactive Content B</a></li>
-  </ul>
+  <a class="back" href="index.html">← 返回首頁</a>
+  <h1>線上觀看 Canva 互動簡報</h1>
+  <p>由於 Canva 不允許直接以 iframe 嵌入，<br>請點擊下方按鈕在新分頁中開啟互動簡報：</p>
+  <a class="button"
+     href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
+     target="_blank"
+  >
+    開啟 Canva 簡報
+  </a>
 </body>
 </html>
