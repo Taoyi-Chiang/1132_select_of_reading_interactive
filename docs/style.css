@@ -1,107 +1,189 @@
-/* -------------------------------------
-   1. html, body 必須設為 height:100%，
-      讓子元素可用百分比高度計算。
-   同時加上紙張底色與質感圖片。
-   文字顏色改為 #0B1013，字型用明朝體。
-------------------------------------- */
+/* ========= 基本 Reset & Container ========= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 html, body {
   height: 100%;
+  /* 底色 + 半透明紙張質感 */
   background-color: #E1A679;
-  /* 先只留底色，不直接放質感圖 */
-  background-image: none;
+  /* 不直接在這裡放質感圖，改由偽元素處理透明度 */
   color: #0B1013;
-  font-family: "PMingLiU", "MingLiU", serif;
+  font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
 }
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('assets/img/paper-texture.jpg') repeat;
-  opacity: 0.3; /* 30% 透明度 */
-  z-index: -1;  /* 放最底層 */
-}
-
-/* -------------------------------------
-   2. body 設為 flex container，垂直 (column) 排列。
-   - header 固定高 40px，不會縮放。
-   - .main-content 會自動填滿剩餘空間 (flex:1)。
-------------------------------------- */
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-/* -------------------------------------
-   3. header 固定高 40px，flex-shrink:0 保持不被縮小。
-   文字色也改為 #0B1013。
-------------------------------------- */
-header {
-  height: 40px;
-  line-height: 40px;
-  background-color: #f2f2f2;
-  padding-left: 16px;
-  font-size: 16px;
-  flex-shrink: 0; /* 不可被縮小 */
-  display: flex;
-  align-items: center;
-  color: #0B1013;
-}
-header a.back {
-  font-size: 14px;
-  color: #0B1013;
-  text-decoration: none;
-  margin-right: 8px;
-}
-header a.back:hover {
-  text-decoration: underline;
-}
-
-/* -------------------------------------
-   4. main-content 區域使用 flex:1，填滿剩餘空間。
-   - position: relative 方便讓 iframe 以絕對定位填滿。
-   - overflow: hidden 避免出現捲動軸溢位。
-   - 確保背景下方依舊能看到紙張質感。
-------------------------------------- */
-.main-content {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-/* -------------------------------------
-   5. 讓 iframe 撐滿 .main-content 的寬高。
-   - position: absolute; top:0; left:0; width:100%; height:100%;
-------------------------------------- */
-.main-content iframe {
-  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  border: none;
+  background: url('assets/img/paper-texture.jpg') repeat;
+  opacity: 0.3;   /* 30% 透明度 */
+  z-index: -1;
+}
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
-/* -------------------------------------
-   6. 當 iframe 載入失敗 (onerror) 時，顯示 .warning 區域。
-   - .warning 用絕對定位置中，文字同樣 #0B1013。
-------------------------------------- */
-.warning {
-  display: none; /* 初始隱藏 */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* ========= 標題 + 說明排版 ========= */
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
   text-align: center;
-  font-size: 18px;
-  color: #0B1013;
-  z-index: 10;
-}
-.warning a {
-  text-decoration: none;
   color: #0B1013;
 }
-.warning a:hover {
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: #0B1013;
+}
+p {
+  margin-bottom: 16px;
+  font-size: 1rem;
+  color: #0B1013;
+}
+/* 圖示連結文字的 underline 樣式 */
+a.link-underline {
+  color: #0B1013;
   text-decoration: underline;
+}
+
+/* ========= 主要區塊：左右 Flex 分欄 ========= */
+.flex-container {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 48px;
+}
+@media (max-width: 768px) {
+  .flex-container {
+    flex-direction: column; /* 窄螢幕時改為直列 */
+  }
+}
+
+/* ----- 左側按鈕區 ----- */
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.button-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0;
+  background: linear-gradient(90deg, #00c4cc, #008b91);
+  color: #fff; /* 按鈕文字維持白色 */
+  text-decoration: none;
+  font-size: 1.125rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+.button-link span.icon {
+  margin-right: 8px;
+  font-size: 1.2rem;
+}
+.button-link:hover {
+  background: linear-gradient(90deg, #029499, #006f73);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ----- 右側：PDF 第一頁預覽區 ----- */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.preview-container-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* 撐滿右側剩餘空間 */
+}
+.preview-container-wrapper > h2,
+.preview-container-wrapper > p {
+  margin-bottom: 8px;
+}
+.preview-container {
+  flex: 1; /* 撐滿除標題＋說明以外的所有高度 */
+  display: flex;
+}
+.pdf-preview {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #fff; /* 與紙張底區做區隔 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.pdf-preview iframe {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+.pdf-preview .caption {
+  padding: 8px 12px;
+  font-size: 0.95rem;
+  color: #0B1013;
+  background-color: #f1f3f5;
+  text-align: center;
+}
+
+/* ========= （可選）舊有 PDF 列表 ========= */
+.pdf-list {
+  margin-top: 40px;
+  list-style: none;
+  padding: 0;
+  border-top: 1px solid #dee2e6;
+}
+.pdf-list li {
+  padding: 16px 0;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pdf-list li:last-child {
+  border-bottom: none;
+}
+.pdf-list .text-link {
+  font-size: 1rem;
+  color: #0B1013;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.pdf-list .text-link:hover {
+  color: #005f6a;
+  text-decoration: underline;
+}
+.pdf-list .icon {
+  margin-left: 8px;
+  font-size: 1.2rem;
+  color: #0B1013;
+  transition: color 0.2s ease;
+}
+.pdf-list .text-link:hover + .icon {
+  color: #005f6a;
+}
+
+/* ========= Footer ========= */
+footer {
+  margin-top: 60px;
+  padding-top: 20px;
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #0B1013;
 }

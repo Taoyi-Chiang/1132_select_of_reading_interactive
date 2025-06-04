@@ -4,185 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>1132 Interactive Showcase</title>
-  <style>
-    /* ========= 基本 Reset & Container ========= */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    html, body {
-      height: 100%;
-      /* 紙張背景：底色 + 紙張質感圖重複 */
-      background-color: #E1A679; 
-      background-image: url('assets/img/paper-texture.jpg');
-      background-repeat: repeat;
-      /* 文字顏色改為深色 #0B1013，字型改用明朝體 */
-      color: #0B1013;
-      font-family: "PMingLiU", "MingLiU", serif;
-    }
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
-    /* ========= 標題 + 說明排版 ========= */
-    h1 {
-      font-size: 2.5rem;
-      font-weight: bold;
-      margin-bottom: 16px;
-      color: #0B1013;    /* 文字同樣用深色 */
-      text-align: center;
-    }
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
-      color: #0B1013;
-    }
-    p {
-      margin-bottom: 16px;
-      font-size: 1rem;
-      color: #0B1013;
-    }
-
-    /* ========= 主要區塊：左右 Flex 分欄 ========= */
-    .flex-container {
-      display: flex;
-      gap: 32px;
-      margin-bottom: 48px;
-    }
-    @media (max-width: 768px) {
-      .flex-container {
-        flex-direction: column; /* 窄螢幕時改為直列 */
-      }
-    }
-
-    /* ----- 左側按鈕區 ----- */
-    .left-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .button-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .button-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px 0;
-      background: linear-gradient(90deg, #00c4cc, #008b91);
-      color: #fff;               /* 按鈕文字保持白色 */
-      text-decoration: none;
-      font-size: 1.125rem;
-      border-radius: 6px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    }
-    .button-link span.icon {
-      margin-right: 8px;
-      font-size: 1.2rem;
-    }
-    .button-link:hover {
-      background: linear-gradient(90deg, #029499, #006f73);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-
-    /* ----- 右側：PDF 第一頁預覽區 ----- */
-    .right-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    /* 讓標題 + 說明佔高度後，預覽框自動撐滿剩餘 */
-    .preview-container-wrapper {
-      display: flex;
-      flex-direction: column;
-      flex: 1;               /* 撐滿右側剩餘空間 */
-    }
-    .preview-container-wrapper > h2,
-    .preview-container-wrapper > p {
-      margin-bottom: 8px;
-    }
-    .preview-container {
-      flex: 1;               /* 撐滿除標題＋說明以外的所有高度 */
-      display: flex;
-    }
-    .pdf-preview {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #dee2e6;
-      border-radius: 4px;
-      overflow: hidden;
-      background-color: #fff; /* 白色背景，與紙張有對比 */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    }
-    .pdf-preview iframe {
-      /* iframe 填滿剩餘高度 */
-      flex: 1;
-      width: 100%;
-      border: none;
-    }
-    .pdf-preview .caption {
-      padding: 8px 12px;
-      font-size: 0.95rem;
-      color: #0B1013;
-      background-color: #f1f3f5;
-      text-align: center;
-    }
-
-    /* ========= （可選）舊有 PDF 列表 ========= */
-    .pdf-list {
-      margin-top: 40px;
-      list-style: none;
-      padding: 0;
-      border-top: 1px solid #dee2e6;
-    }
-    .pdf-list li {
-      padding: 16px 0;
-      border-bottom: 1px solid #dee2e6;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .pdf-list li:last-child {
-      border-bottom: none;
-    }
-    .pdf-list .text-link {
-      font-size: 1rem;
-      color: #0B1013;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-    .pdf-list .text-link:hover {
-      color: #005f6a;
-      text-decoration: underline;
-    }
-    .pdf-list .icon {
-      margin-left: 8px;
-      font-size: 1.2rem;
-      color: #0B1013;
-      transition: color 0.2s ease;
-    }
-    .pdf-list .text-link:hover + .icon {
-      color: #005f6a;
-    }
-
-    /* ========= Footer ========= */
-    footer {
-      margin-top: 60px;
-      padding-top: 20px;
-      border-top: 1px solid #dee2e6;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #0B1013;
-    }
-  </style>
+  <!-- 連結到同一層的 style.css -->
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
@@ -231,16 +54,16 @@
         </div>
       </div>
 
-      <!-- 右側：單一 PDF 第一頁預覽，撐滿左側高度 -->
+      <!-- 右側：PDF 第一頁預覽，且文字本身為連結 -->
       <div class="right-panel">
         <div class="preview-container-wrapper">
           <h2>PDF 第一頁預覽</h2>
           <p>
             <a
+              class="link-underline"
               href="assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf"
               target="_blank"
               rel="noopener"
-              style="color: #0B1013; text-decoration: underline;"
             >
               示意下方第一頁縮圖 (縮放以全寬顯示)
             </a>
