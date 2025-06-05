@@ -123,8 +123,6 @@ p {
   background-color: #6F3637;
 }
 
-/* ================= 前面部分保持不變（略） ================= */
-
 /* ========= 右側 PDF 第一頁預覽區 ========= */
 .right-panel {
   flex: 1;
@@ -134,70 +132,63 @@ p {
   z-index: 1;
 }
 
-/* 這段示範“預覽標題”和“PDF 連結按鈕（如有）”之間的小空間 */
+/* “預覽標題” 與 “PDF 連結按鈕” 之間的小空間 */
 .preview-container-wrapper > h2,
 .preview-container-wrapper > p {
   margin-bottom: 8px;
 }
 
-/* 固定預覽區的高度，與左側按鈕區相仿 */
+/* 取消固定高度，改成自動撐開 */
 .preview-container {
   display: flex;
-  /* 高度直接鎖死，例如 350px，可依右側按鈕數量和左邊高度調整 */
-  height: 350px;
-  /* 如果想讓寬度也有最大限制，可在 .right-panel 或 .preview-container 設 width */
+  /* 不設定 height，改為根據內容自動撐開 */
 }
 
-/* PDF 預覽框：填滿整個 .preview-container，並移除背景色 */
+/* PDF 預覽框：取消強制填滿父容器 */
 .pdf-preview {
-  flex: 1;                      /* 讓 pdf-preview 撐滿父容器高度 */
-  display: flex;
-  flex-direction: column;
-  height: 100%;                 /* 與父容器同高 */
+  display: block;           /* 以 block 呈現 */
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  overflow: hidden;             /* 隱藏多餘部分 */
-  background-color: transparent;/* 取消原先深色，讓背景透明 */
+  overflow: hidden;         /* 隱藏超出範圍的部分 */
+  background-color: transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 1;
 }
 
-/* 如果你用 Canvas 方式呈現第一頁，強制它填滿 .pdf-preview */
+/* 如果使用 Canvas 呈現第一頁，讓它寬度 100%、高度自動 */
 .pdf-preview canvas {
-  width: 100%; /* 撐滿寬度 */
-  height: 100%;/* 撐滿高度（不再保持原始長寬比） */
-  object-fit: cover; /* 如果想裁切或填滿，也可以用這個，但通常只要 100% x 100% 即可 */
+  width: 100%;
+  height: auto;       /* 高度跟內容一致 */
+  display: block;     /* 去除下方可能的空隙 */
 }
 
-/* 如果你改為用 iframe 嵌入 PDF.js，請類似地讓它填滿： */
+/* 如果改為 <iframe> 嵌入 PDF.js Viewer，讓它自動高度或設定固定高度 */
+/* 例如若要自動高度： */
 .pdf-preview iframe {
   width: 100%;
-  height: 100%;
-  border: none; /* 取消預設邊框 */
-  display: block; 
+  height: auto;       /* 讓 iframe 依內容高度自動撐開 */
+  border: none;
+  display: block;
 }
 
-/* PDF 連結按鈕置中，並且寬度與左側按鈕一致 */
+/* ========= PDF 連結按鈕置中，並與左側按鈕同寬 ========= */
 .pdf-button-wrapper {
   margin-top: 12px;        /* 與預覽框保持縱向間距 */
   display: flex;
   justify-content: center;
 }
-
-/* 讓右側 PDF 連結按鈕同左側按鈕等寬 */
 .pdf-button-wrapper .button-link {
   background-color: #954A45;
   width: 100%;       /* 撐滿父容器寬度 */
-  max-width: 100%;   /* 不超出父容器 */
+  max-width: 100%;   /* 不超過容器 */
   text-align: center;
-  /* 如果左側按鈕有明確寬度限制，也可把相同限制加在這裡 */
 }
 .pdf-button-wrapper .button-link:hover {
   background-color: #6F3637;
 }
 
-/* ========= Footer（略） ========= */
+/* ========= Footer ========= */
 footer {
   margin-top: 60px;
   padding-top: 20px;
