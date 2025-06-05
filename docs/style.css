@@ -5,7 +5,8 @@
   padding: 0;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   min-height: 100%;
@@ -68,7 +69,7 @@ p {
   gap: 32px;
   margin-bottom: 48px;
 
-  /* ↓ 加上這行：讓左右兩欄從「頂端」對齊 ↓ */
+  /* 讓左右兩欄的頂端對齊 */
   align-items: flex-start;
 }
 @media (max-width: 768px) {
@@ -101,7 +102,9 @@ p {
   font-size: 1.125rem;       /* 字體大小 */
   border-radius: 6px;        /* 邊角圓潤 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 微陰影 */
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease,
+              box-shadow 0.3s ease,
+              transform 0.2s ease;
 }
 .button-link span.icon {
   margin-right: 8px;   /* 圖示與文字之間的間距 */
@@ -141,10 +144,10 @@ p {
   margin-bottom: 8px;
 }
 
-/* 取消固定高度，改成自動撐開 */
+/* 讓預覽區塊高度跟內容一致（移除固定高度） */
 .preview-container {
   display: flex;
-  /* 原本 height: 350px 的設定已刪除 */
+  /* 不再設定 height， 讓內容（canvas/iframe）自行決定高度 */
 }
 
 /* PDF 預覽框：不再強制填滿父容器 */
@@ -166,8 +169,8 @@ p {
   display: block;     /* 去除下方可能的空隙 */
 }
 
-/* 如果改為 <iframe> 嵌入 PDF.js Viewer，讓它自動高度或設定固定高度 */
-/* 例如若要自動高度： */
+/* 如果改為 <iframe> 嵌入 PDF.js Viewer，讓它自動撐開或給定固定高度 */
+/* 若要讓 iframe 自動撐高，可以寫 height: auto; */
 .pdf-preview iframe {
   width: 100%;
   height: auto;       /* 讓 iframe 依內容高度自動撐開 */
@@ -183,8 +186,8 @@ p {
 }
 .pdf-button-wrapper .button-link {
   background-color: #954A45;
-  width: 100%;       /* 撐滿父容器寬度 */
-  max-width: 100%;   /* 不超出容器 */
+  width: 100%;       /* 撐滿父容器寬度，使大小與左側一致 */
+  max-width: 100%;   /* 不超過容器 */
   text-align: center;
 }
 .pdf-button-wrapper .button-link:hover {
