@@ -10,17 +10,17 @@ html, body {
   padding: 0;
   min-height: 100%;
 
-  /* 1. 底色（膚色） */
+  /* 底色（膚色） */
   background-color: #E1A679;
 
-  /* 2. 貼上紙張紋理 */
+  /* 貼上紙張紋理 */
   background-image: url('assets/img/paper-texture.jpg');
   background-repeat: repeat;
 
-  /* 3. 用 multiply 把底色與紋理混合，產生「帶膚色的紙張紋理」 */
+  /* 用 multiply 把底色與紋理混合，產生「帶膚色的紙張紋理」 */
   background-blend-mode: multiply;
 
-  /* 4. 字型與文字顏色 */
+  /* 字型與文字顏色 */
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
   color: #0B1013;
 }
@@ -139,40 +139,25 @@ p {
   display: flex;
 }
 
-/* PDF 預覽框 */
+/* PDF 預覽框，裡面只塞 canvas，只顯示第一頁 */
 .pdf-preview {
   flex: 1;
   display: flex;
   flex-direction: column;
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  overflow: hidden;
-  background-color: #2E2515; /* 已改為深色 */
+  overflow: hidden;        /* 隱藏多餘部分，僅顯示第一頁 */
+  background-color: #2E2515;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   position: relative;
   z-index: 1;
 }
 
-.pdf-preview iframe,
-.pdf-preview img {
-  flex: 1;
+/* 讓 canvas 自動填滿預覽框的寬度 */
+.pdf-preview canvas {
   width: 100%;
-  border: none;
-
-  position: relative;
-  z-index: 1;
-}
-
-.pdf-preview .caption {
-  background-color: #2E2515; /* 由原先的 #f1f3f5 改成 #2E2515 */
-  color: #fff;               /* 改成白色文字，確保對比度 */
-  text-align: center;
-  padding: 8px 12px;
-  font-size: 0.95rem;
-
-  position: relative;
-  z-index: 1;
+  height: auto;
 }
 
 /* ========= Footer ========= */

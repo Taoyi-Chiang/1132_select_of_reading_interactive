@@ -6,6 +6,13 @@
   <title>1132 Interactive Showcase</title>
   <!-- 連結到外部 style.css -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- 載入 PDF.js -->
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
+  <script>
+    // 指定 PDF.js worker 的位置
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.worker.min.js';
+  </script>
 </head>
 <body>
   <div class="container">
@@ -60,11 +67,11 @@
           target="_blank"
           rel="noopener"
         >
-          <span class="icon">📖</span>游其賢【牡丹亭互動故事】
+          <span class="icon">📖</span>必修經典的對話與轉化
         </a>
       </div>
 
-      <!-- 右側：PDF 第一頁預覽，文字亦改成按鈕 -->
+      <!-- 右側：只顯示 PDF 第一頁的預覽 -->
       <div class="right-panel">
         <div class="preview-container-wrapper">
           <h2>精彩內容預覽</h2>
@@ -78,13 +85,11 @@
               郭宜瑄【忍辱負重真英雄】
             </a>
           </p>
+
+          <!-- 這裡放置 Canvas，只渲染 PDF 第一頁 -->
           <div class="preview-container">
             <div class="pdf-preview">
-              <iframe
-                src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf#page=1&zoom=page-fit"
-                title="112101520 郭宜瑄 - 遊戲（可操作） 第一頁預覽"
-                style="width:100%; height:100%; border:none;"
-              ></iframe>
+              <div id="pdf-page-1-container"></div>
             </div>
           </div>
         </div>
@@ -96,5 +101,40 @@
       © 2025 王學玲教授、郭永吉副教授 All rights reserved.
     </footer>
   </div>
+
+  <script>
+    // 等 DOM 完全載入後，使用 PDF.js 只渲染第一頁
+    document.addEventListener('DOMContentLoaded', () => {
+      const pdfUrl = 'assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf';
+
+      // 載入 PDF 文件
+      const loadingTask = pdfjsLib.getDocument(pdfUrl);
+      loadingTask.promise
+        .then(pdf => pdf.getPage(1))       // 只取第 1 頁
+        .then(page => {
+          const scale = 1.0;               // 縮放比例，可依需求微調
+          const viewport = page.getViewport({ scale });
+
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+
+          // 把 <canvas> 放到指定的容器
+          const container = document.getElementById('pdf-page-1-container');
+          container.appendChild(canvas);
+
+          // 開始渲染第一頁
+          const renderContext = {
+            canvasContext: context,
+            viewport: viewport
+          };
+          page.render(renderContext);
+        })
+        .catch(error => {
+          console.error('PDF 讀取或渲染失敗：', error);
+        });
+    });
+  </script>
 </body>
 </html>
