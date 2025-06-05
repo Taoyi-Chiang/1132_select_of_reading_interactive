@@ -10,17 +10,17 @@ html, body {
   padding: 0;
   min-height: 100%;
 
-  /* 底色（膚色） */
+  /* 1. 底色（膚色） */
   background-color: #E1A679;
 
-  /* 貼上紙張紋理 */
+  /* 2. 貼上紙張紋理 */
   background-image: url('assets/img/paper-texture.jpg');
   background-repeat: repeat;
 
-  /* 用 multiply 把底色與紋理混合，產生「帶膚色的紙張紋理」 */
+  /* 3. 用 multiply 把底色與紋理混合，產生「帶膚色的紙張紋理」 */
   background-blend-mode: multiply;
 
-  /* 字型與文字顏色 */
+  /* 4. 字型與文字顏色 */
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
   color: #0B1013;
 }
@@ -54,6 +54,14 @@ p {
   color: #0B1013;
 }
 
+/* ========= 「按下按鈕即可在新分頁開啟互動內容：」說明文字 ========= */
+.instruction {
+  text-align: center;      /* 文字置中於整個容器 */
+  font-size: 1.125rem;     /* 稍微放大字體 */
+  margin-bottom: 24px;     /* 與下面左右區塊保持間距 */
+  color: #0B1013;
+}
+
 /* ========= 主要區塊：左右 Flex 分欄 ========= */
 .flex-container {
   display: flex;
@@ -84,16 +92,16 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 0;
-  color: #fff; /* 按鈕文字為白色 */
-  text-decoration: none;
-  font-size: 1.125rem;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  padding: 16px 0;           /* 上下內距 */
+  color: #fff;               /* 按鈕文字為白色 */
+  text-decoration: none;     /* 去除底線 */
+  font-size: 1.125rem;       /* 字體大小 */
+  border-radius: 6px;        /* 邊角圓潤 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* 微陰影 */
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
 }
 .button-link span.icon {
-  margin-right: 8px;
+  margin-right: 8px;   /* 圖示與文字之間的間距 */
   font-size: 1.2rem;
 }
 /* 左側按鈕顏色 (#43341B) */
@@ -103,15 +111,16 @@ p {
 .left-panel .button-link:hover {
   background-color: #2E2515;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* 懸停時往上微移 */
 }
 
 /* ========= 右側按鈕區 ========= */
+/* 右側按鈕（PDF 連結）顏色 */
 .right-panel .button-link {
-  background-color: #954A45; /* 右側按鈕顏色 */
+  background-color: #954A45;
 }
 .right-panel .button-link:hover {
-  background-color: #6F3637; /* 右側按鈕 hover 顏色 */
+  background-color: #6F3637;
 }
 
 /* ========= 右側 PDF 第一頁預覽區 ========= */
@@ -119,8 +128,6 @@ p {
   flex: 1;
   display: flex;
   flex-direction: column;
-
-  /* 預覽區只要跟在 .container 之下即可，無需更高層級 */
   position: relative;
   z-index: 1;
 }
@@ -129,22 +136,21 @@ p {
   display: flex;
   flex-direction: column;
 
-  /* 移除 flex: 1，避免自動撐滿 */
+  /* 移除 flex: 1，避免自動撐滿整個右側 */
   /* flex: 1; */
 }
 .preview-container-wrapper > h2,
 .preview-container-wrapper > p {
-  margin-bottom: 8px;
+  margin-bottom: 8px;  /* 預覽標題與按鈕之間的間距 */
 }
 
+/* 固定預覽區的高度，與左側按鈕區相仿 */
 .preview-container {
   display: flex;
-
-  /* 固定高度，與左側按鈕區相仿 */
-  height: 350px; /* 可以依需求微調 */
+  height: 350px; /* 可依需求微調：此高度約為左側按鈕區總高度 */
 }
 
-/* PDF 預覽框，裡面只塞 canvas，只顯示第一頁 */
+/* PDF 預覽框，裡面只塞 Canvas（或 iframe），僅顯示第一頁 */
 .pdf-preview {
   flex: 1;
   display: flex;
@@ -155,18 +161,25 @@ p {
 
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  overflow: hidden;        /* 隱藏多餘部分，僅顯示第一頁 */
-  background-color: #2E2515;
+  overflow: hidden;        /* 隱藏超出範圍的部分 */
+  background-color: #2E2515; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   position: relative;
   z-index: 1;
 }
 
-/* 讓 canvas 自動填滿預覽框的寬度 */
+/* 讓 Canvas 自動填滿預覽框的寬度 */
 .pdf-preview canvas {
   width: 100%;
   height: auto;
+}
+
+/* ========= PDF 連結按鈕的包裹器 ========= */
+.pdf-button-wrapper {
+  margin-top: 8px;         /* 與預覽框保持距離 */
+  display: flex;
+  justify-content: center; /* 按鈕置中 */
 }
 
 /* ========= Footer ========= */

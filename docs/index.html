@@ -7,10 +7,9 @@
   <!-- 連結到外部 style.css -->
   <link rel="stylesheet" href="style.css" />
 
-  <!-- 載入 PDF.js -->
+  <!-- 載入 PDF.js（如有使用 Canvas 方式呈現第一頁，可保留）-->
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.min.js"></script>
   <script>
-    // 指定 PDF.js worker 的位置
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.16.105/build/pdf.worker.min.js';
   </script>
 </head>
@@ -20,13 +19,15 @@
     <h1 style="text-align: center;"><b>必修經典的對話與轉化</b></h1>
     <h2 style="text-align: center;"><b>以中文系「中國文學史」與「歷代文選及習作」為實踐場域<br>期末成果展</b></h2>
 
+    <!-- 置中顯示的說明，讓左右兩邊共用 -->
+    <p class="instruction">按下按鈕即可在新分頁開啟互動內容：</p>
+
     <!-- 左右 Flex 分欄 -->
     <div class="flex-container">
-      <!-- 左側：按鈕區 -->
+      <!-- 左側：五個互動按鈕 -->
       <div class="left-panel">
         <h2>互動遊戲區</h2>
-        <p><b>按下按鈕即可在新分頁開啟互動內容：</b></p>
-        <!-- 原有的四個連結 -->
+
         <a
           class="button-link"
           href="https://www.canva.com/design/DAGpFzrPRlY/kAbrUGdF4cIz9E-RVxPlhQ/view?utm_content=DAGpFzrPRlY&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h203c521883#1"
@@ -35,6 +36,7 @@
         >
           <span class="icon">🎨</span>楊昕璇【生死抉擇】
         </a>
+
         <a
           class="button-link"
           href="https://ooopenlab.cc/quiz/0AyaD2QfWJWmF1YjwjVA"
@@ -43,6 +45,7 @@
         >
           <span class="icon">📝</span>黃苓維【走進報任少卿書，你會是哪一種人格】
         </a>
+
         <a
           class="button-link"
           href="page3.html"
@@ -51,6 +54,7 @@
         >
           <span class="icon">🔗</span>游其賢【史記人物：歷史抉擇錄】
         </a>
+
         <a
           class="button-link"
           href="https://a-split-second.my.canva.site/"
@@ -60,22 +64,39 @@
           <span class="icon">🌐</span>莊媗妅【生死抉擇】
         </a>
 
-        <!-- 新增：連結到 page6.html -->
         <a
           class="button-link"
           href="page6.html"
           target="_blank"
           rel="noopener"
         >
-          <span class="icon">📖</span>必修經典的對話與轉化
+          <span class="icon">📖</span>游其賢【牡丹亭互動故事】
         </a>
       </div>
 
-      <!-- 右側：只顯示 PDF 第一頁的預覽 -->
+      <!-- 右側：PDF 第一頁預覽 + 小豆色按鈕移至下方 -->
       <div class="right-panel">
         <div class="preview-container-wrapper">
           <h2>精彩內容預覽</h2>
-          <p>
+
+          <!-- PDF 第一頁預覽區 -->
+          <div class="preview-container">
+            <div class="pdf-preview">
+              <!-- 如果你用 Canvas 渲染，請保留下面這個 div；若用 <iframe>，可直接將 iframe 放在此處 -->
+              <div id="pdf-page-1-container"></div>
+
+              <!-- 如果你想直接用 iframe 方式顯示第一頁，也可以改成：
+              <iframe
+                src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://taoyi-chiang.github.io/1132_select_of_reading_interactive/assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf#page=1&zoom=page-fit"
+                title="112101520 郭宜瑄 - 忍辱負重真英雄 第一頁預覽"
+                style="width:100%; height:100%; border:none;"
+              ></iframe>
+              -->
+            </div>
+          </div>
+
+          <!-- 小豆色按鈕：PDF 連結，已移到預覽區下方 -->
+          <p class="pdf-button-wrapper">
             <a
               class="button-link"
               href="assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf"
@@ -85,13 +106,6 @@
               郭宜瑄【忍辱負重真英雄】
             </a>
           </p>
-
-          <!-- 這裡放置 Canvas，只渲染 PDF 第一頁 -->
-          <div class="preview-container">
-            <div class="pdf-preview">
-              <div id="pdf-page-1-container"></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -102,38 +116,24 @@
     </footer>
   </div>
 
+  <!-- 如果你使用 PDF.js 渲染第一頁，請保留這段 Script -->
   <script>
-    // 等 DOM 完全載入後，使用 PDF.js 只渲染第一頁
     document.addEventListener('DOMContentLoaded', () => {
       const pdfUrl = 'assets/pdf/112101520%E9%83%AD%E5%AE%9C%E7%91%84-%E9%81%8A%E6%88%B2%EF%BC%88%E5%8F%AF%E6%93%8D%E4%BD%9C%EF%BC%89.pdf';
-
-      // 載入 PDF 文件
-      const loadingTask = pdfjsLib.getDocument(pdfUrl);
-      loadingTask.promise
-        .then(pdf => pdf.getPage(1))       // 只取第 1 頁
+      pdfjsLib.getDocument(pdfUrl).promise
+        .then(pdf => pdf.getPage(1))
         .then(page => {
-          const scale = 1.0;               // 縮放比例，可依需求微調
+          const scale = 1.0;
           const viewport = page.getViewport({ scale });
-
           const canvas = document.createElement('canvas');
           const context = canvas.getContext('2d');
           canvas.width = viewport.width;
           canvas.height = viewport.height;
-
-          // 把 <canvas> 放到指定的容器
-          const container = document.getElementById('pdf-page-1-container');
-          container.appendChild(canvas);
-
-          // 開始渲染第一頁
-          const renderContext = {
-            canvasContext: context,
-            viewport: viewport
-          };
+          document.getElementById('pdf-page-1-container').appendChild(canvas);
+          const renderContext = { canvasContext: context, viewport: viewport };
           page.render(renderContext);
         })
-        .catch(error => {
-          console.error('PDF 讀取或渲染失敗：', error);
-        });
+        .catch(err => console.error(err));
     });
   </script>
 </body>
