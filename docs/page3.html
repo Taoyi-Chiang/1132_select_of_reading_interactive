@@ -2,74 +2,118 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Page 3：Genially 互動內容</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page 3：史記人物互動體驗</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      font-family: "PMingLiU", Arial, sans-serif;
+    body {
+      font-family: "Noto Serif TC", serif;
+      background-color: #f8f6f1;
+      color: #2c2c2c;
+      padding: 40px;
+      max-width: 960px;
+      margin: auto;
+      line-height: 1.8;
     }
-    header {
-      height: 40px;
-      line-height: 40px;
-      background-color: #f2f2f2;
-      padding-left: 16px;
-      font-size: 16px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
+    h1 {
+      text-align: center;
+      font-size: 2.8rem;
+      margin-bottom: 30px;
     }
-    header a.back {
-      font-size: 14px;
-      color: #2C3E50;
+    h2 {
+      font-size: 1.6rem;
+      margin-top: 30px;
+      border-left: 5px solid #95612e;
+      padding-left: 10px;
+      color: #513414;
+    }
+    .story {
+      margin-bottom: 25px;
+    }
+    button {
+      background-color: #95612e;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 40px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #6f471e;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #888;
+    }
+    /* 如果要「← 返回首頁」，可放開以下註解：
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #2c2c2c;
       text-decoration: none;
-      margin-right: 8px;
+      font-size: 0.9rem;
     }
-    header a.back:hover {
+    .back-link:hover {
       text-decoration: underline;
     }
-    .container {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .button-link {
-      display: inline-block;
-      padding: 16px 32px;
-      background-color: #00C4CC;
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-      border-radius: 4px;
-      transition: background-color 0.2s ease;
-    }
-    .button-link:hover {
-      background-color: #029499;
-    }
+    */
   </style>
 </head>
 <body>
 
-  <header>
-    <a class="back" href="index.html">← 返回首頁</a>
-    <span>Page 3：Genially 互動內容</span>
-  </header>
+  <!-- <a class="back-link" href="index.html">← 返回首頁</a> -->
 
-  <div class="container">
-    <!-- 按鈕改為開啟 page3-content.html -->
-    <a class="button-link"
-       href="page3-content.html"
-       target="_blank"
-       rel="noopener"
-    >
-      在新分頁開啟 Genially 互動
-    </a>
+  <h1>史記人物：歷史抉擇錄</h1>
+
+  <div class="story">
+    <h2>司馬遷</h2>
+    <p>
+      西漢太史令司馬遷，因為為李陵辯護得罪漢武帝，被下獄施以腐刑。本可選擇自盡以保節，但他忍辱負重，最終完成傳世之作《史記》，記載從黃帝至漢武帝的歷史，五十二萬言，成為千古第一史書。他的選擇，不只是個人的救贖，更是對後世的承諾。
+    </p>
   </div>
 
+  <div class="story">
+    <h2>韓信</h2>
+    <p>
+      韓信出身寒微，忍辱求生，曾受胯下之辱，後投劉邦麾下，以卓越軍略轉戰諸國，功勞堪比三傑之首。然其權勢過大，最終被呂后與蕭何設計誅殺。韓信的一生，是從微末到巔峰、再至悲劇收場的寫照，令人扼腕。
+    </p>
+  </div>
+
+  <div class="story">
+    <h2>伍子胥</h2>
+    <p>
+      楚國大臣之子伍子胥，目睹父兄被誣殺，逃亡吳國，輔佐吳王闔閭興兵伐楚，為父兄報仇。最終因直言諫君而被吳王夫差賜劍自盡。他請求將雙眼懸於城門，以見吳國覆亡之時。他的一生，是忠誠與悲壯的象徵。
+    </p>
+  </div>
+
+  <div class="story">
+    <h2>程嬰</h2>
+    <p>
+      面對屠岸賈誅滅趙氏滿門，程嬰冒死救下趙氏孤兒，捨子保義，隱忍十三年，最終助趙家復國報仇。他的抉擇，跨越了父子的親情、個人的安危，成就了歷史上最感人的忠義傳奇之一。
+    </p>
+  </div>
+
+  <button onclick="openGame()">🎮 開啟互動式抉擇遊戲</button>
+
+  <script>
+    function openGame() {
+      window.open(
+        "https://view.genially.com/6831c7c45120389f5078250c/interactive-content-112101527",
+        "geniallyWindow",
+        "width=1000,height=700,resizable=yes,scrollbars=yes"
+      );
+    }
+  </script>
+
+  <footer>
+    © 2025 歷史抉擇錄｜史記人物互動體驗
+  </footer>
 </body>
 </html>
