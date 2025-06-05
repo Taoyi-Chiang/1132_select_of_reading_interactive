@@ -4,16 +4,8 @@
   margin: 0;
   padding: 0;
 }
-html, body {
-  height: 100%;
-  /* 先讓整頁底色為純色（膚色或白色都行） */
-  background-color: #E1A679;  /* 或 background-color: #fff; */
-  color: #0B1013;
-  font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
-}
 
-/* 用 ::before 疊一層半透明紙張紋理 */
-body::before {
+html, body {
   content: "";
   position: fixed;
   top: 0; left: 0;
@@ -22,8 +14,8 @@ body::before {
   background: url('assets/img/paper-texture.jpg') repeat;
   opacity: 0.5;       /* 半透明 */
   z-index: -1;        /* 放到最底下 */
+  font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
 }
-
 
 /* 让 container 在伪元素之上 */
 .container {
