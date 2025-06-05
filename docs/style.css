@@ -151,36 +151,44 @@ p {
 }
 
 /* PDF 預覽框，裡面只塞 Canvas（或 iframe），僅顯示第一頁 */
+/* PDF 預覽框：移除不必要的深色背景 */
 .pdf-preview {
   flex: 1;
   display: flex;
   flex-direction: column;
 
-  /* 父容器 .preview-container 已設定 height: 350px */
+  /* 高度來自父層 preview-container */
   height: 100%;
 
   border: 1px solid #dee2e6;
   border-radius: 4px;
-  overflow: hidden;        /* 隱藏超出範圍的部分 */
-  background-color: #2E2515; 
+  overflow: hidden;
+  /* 移除背景色（深咖啡） */
+  background-color: transparent;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   position: relative;
   z-index: 1;
 }
 
-/* 讓 Canvas 自動填滿預覽框的寬度 */
-.pdf-preview canvas {
-  width: 100%;
-  height: auto;
+/* PDF 連結按鈕置中，並統一樣式 */
+.pdf-button-wrapper {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
 }
 
-/* ========= PDF 連結按鈕的包裹器 ========= */
-.pdf-button-wrapper {
-  margin-top: 8px;         /* 與預覽框保持距離 */
-  display: flex;
-  justify-content: center; /* 按鈕置中 */
+/* 右側 PDF 連結的按鈕：統一和左邊一樣大小、樣式 */
+.pdf-button-wrapper .button-link {
+  background-color: #954A45;
+  width: 100%;          /* 與左側一致寬度 */
+  max-width: 100%;      /* 不超過容器 */
+  text-align: center;
 }
+.pdf-button-wrapper .button-link:hover {
+  background-color: #6F3637;
+}
+
 
 /* ========= Footer ========= */
 footer {
