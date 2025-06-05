@@ -67,6 +67,9 @@ p {
   display: flex;
   gap: 32px;
   margin-bottom: 48px;
+
+  /* ↓ 加上這行：讓左右兩欄從「頂端」對齊 ↓ */
+  align-items: flex-start;
 }
 @media (max-width: 768px) {
   .flex-container {
@@ -141,16 +144,16 @@ p {
 /* 取消固定高度，改成自動撐開 */
 .preview-container {
   display: flex;
-  /* 不設定 height，改為根據內容自動撐開 */
+  /* 原本 height: 350px 的設定已刪除 */
 }
 
-/* PDF 預覽框：取消強制填滿父容器 */
+/* PDF 預覽框：不再強制填滿父容器 */
 .pdf-preview {
   display: block;           /* 以 block 呈現 */
   border: 1px solid #dee2e6;
   border-radius: 4px;
   overflow: hidden;         /* 隱藏超出範圍的部分 */
-  background-color: transparent;
+  background-color: transparent; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   position: relative;
   z-index: 1;
@@ -181,7 +184,7 @@ p {
 .pdf-button-wrapper .button-link {
   background-color: #954A45;
   width: 100%;       /* 撐滿父容器寬度 */
-  max-width: 100%;   /* 不超過容器 */
+  max-width: 100%;   /* 不超出容器 */
   text-align: center;
 }
 .pdf-button-wrapper .button-link:hover {
