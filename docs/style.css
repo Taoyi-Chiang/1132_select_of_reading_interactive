@@ -10,25 +10,25 @@ html, body {
   padding: 0;
   min-height: 100%;
 
-  /* 1. 先定義你想要的底色（膚色） */
+  /* 1. 底色（膚色） */
   background-color: #E1A679;
 
-  /* 2. 再定義紙張紋理背景（不含任何 transparency） */
+  /* 2. 貼上紙張紋理 */
   background-image: url('assets/img/paper-texture.jpg');
-  background-repeat: repeat;   /* 平鋪重複 */
+  background-repeat: repeat;
 
-  /* 3. 用 multiply 模式把「底色 + 紋理」混合成最終效果 */
-  background-blend-mode: multiply;  
+  /* 3. 用 multiply 把底色與紋理混合 */
+  background-blend-mode: multiply;
 
-  /* 4. 文字、字型等其他設定照舊 */
+  /* 4. 字型與文字顏色 */
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
   color: #0B1013;
 }
 
-/* 让 container 在伪元素之上 */
+/* ========= Container 層級 ========= */
 .container {
-  position: relative;
-  z-index: 0; /* ≥0 即可位于伪元素之上 */
+  position: relative; /* 形成新的 stacking context */
+  z-index: 0;         /* 內容都在此之上 */
   max-width: 960px;
   margin: 0 auto;
   padding: 40px 20px;
@@ -65,8 +65,21 @@ p {
   }
 }
 
-/* ----- 按鈕共用樣式，改色由父面板決定 ----- */
+/* ========= 左側按鈕區 ========= */
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  /* 確保左側按鈕區層級較高，不被右側預覽蓋住 */
+  position: relative;
+  z-index: 2;
+}
+
 .button-link {
+  position: relative; /* 使 z-index 生效 */
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +95,7 @@ p {
   margin-right: 8px;
   font-size: 1.2rem;
 }
-/* 左側父面板的按鈕顏色：#43341B */
+/* 左側按鈕顏色 */
 .left-panel .button-link {
   background-color: #43341B;
 }
@@ -92,30 +105,17 @@ p {
   transform: translateY(-2px);
 }
 
-/* 右側父面板的按鈕顏色：#954A45 */
-.right-panel .button-link {
-  background-color: #954A45;
-}
-.right-panel .button-link:hover {
-  background-color: #6F3637;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px);
-}
-
-/* ----- 左側按鈕區 ----- */
-.left-panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-/* ----- 右側 PDF 第一頁預覽區 ----- */
+/* ========= 右側 PDF 第一頁預覽區 ========= */
 .right-panel {
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  /* 預覽區只要跟在 .container 之下即可，無需更高層級 */
+  position: relative;
+  z-index: 1;
 }
+
 .preview-container-wrapper {
   display: flex;
   flex-direction: column;
@@ -129,6 +129,8 @@ p {
   flex: 1; /* 撐滿除標題＋說明以外的所有高度 */
   display: flex;
 }
+
+/* PDF 預覽框 */
 .pdf-preview {
   flex: 1;
   display: flex;
@@ -136,20 +138,32 @@ p {
   border: 1px solid #dee2e6;
   border-radius: 4px;
   overflow: hidden;
-  background-color: #fff; /* 與紙張底區做區隔 */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  background-color: #fff; /* 與紙張底做區隔 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+  position: relative;
+  z-index: 1; /* 確保在按鈕之下 */
 }
-.pdf-preview iframe {
+
+.pdf-preview iframe,
+.pdf-preview img {
   flex: 1;
   width: 100%;
   border: none;
+
+  position: relative;
+  z-index: 1; /* 確保不蓋住左側按鈕 */
 }
+
 .pdf-preview .caption {
   padding: 8px 12px;
   font-size: 0.95rem;
   color: #0B1013;
   background-color: #f1f3f5;
   text-align: center;
+
+  position: relative;
+  z-index: 1;
 }
 
 /* ========= Footer ========= */
@@ -160,4 +174,7 @@ footer {
   text-align: center;
   font-size: 0.9rem;
   color: #0B1013;
+
+  position: relative;
+  z-index: 1;
 }
