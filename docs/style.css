@@ -17,7 +17,7 @@ html, body {
   background-image: url('assets/img/paper-texture.jpg');
   background-repeat: repeat;
 
-  /* 3. 用 multiply 把底色與紋理混合 */
+  /* 3. 用 multiply 把底色與紋理混合，產生「帶膚色的紙張紋理」 */
   background-blend-mode: multiply;
 
   /* 4. 字型與文字顏色 */
@@ -39,12 +39,13 @@ h1 {
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 16px;
-  text-align: center;
+  text-align: center; /* 文字置中 */
   color: #0B1013;
 }
 h2 {
   font-size: 1.5rem;
   margin-bottom: 8px;
+  text-align: center; /* 文字置中 */
   color: #0B1013;
 }
 p {
