@@ -6,15 +6,23 @@
 }
 
 html, body {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('assets/img/paper-texture.jpg') repeat;
-  opacity: 0.5;       /* 半透明 */
-  z-index: -1;        /* 放到最底下 */
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+
+  /* 1. 先定義你想要的底色（膚色） */
+  background-color: #E1A679;
+
+  /* 2. 再定義紙張紋理背景（不含任何 transparency） */
+  background-image: url('assets/img/paper-texture.jpg');
+  background-repeat: repeat;   /* 平鋪重複 */
+
+  /* 3. 用 multiply 模式把「底色 + 紋理」混合成最終效果 */
+  background-blend-mode: multiply;  
+
+  /* 4. 文字、字型等其他設定照舊 */
   font-family: "Microsoft JhengHei", "PMingLiU", Arial, sans-serif;
+  color: #0B1013;
 }
 
 /* 让 container 在伪元素之上 */
