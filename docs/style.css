@@ -144,14 +144,14 @@ p {
   flex: 1;
   display: flex;
   flex-direction: column;
-  border: 1px solid #2E2515;
+  border: 1px solid #dee2e6;
   border-radius: 4px;
   overflow: hidden;
-  background-color: #2E2515; /* 與紙張底做區隔 */
+  background-color: #2E2515; /* 已改為深色 */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 
   position: relative;
-  z-index: 1; /* 確保在按鈕之下 */
+  z-index: 1;
 }
 
 .pdf-preview iframe,
@@ -161,15 +161,15 @@ p {
   border: none;
 
   position: relative;
-  z-index: 1; /* 確保不蓋住左側按鈕 */
+  z-index: 1;
 }
 
 .pdf-preview .caption {
+  background-color: #2E2515; /* 由原先的 #f1f3f5 改成 #2E2515 */
+  color: #fff;               /* 改成白色文字，確保對比度 */
+  text-align: center;
   padding: 8px 12px;
   font-size: 0.95rem;
-  color: #0B1013;
-  background-color: #f1f3f5;
-  text-align: center;
 
   position: relative;
   z-index: 1;
