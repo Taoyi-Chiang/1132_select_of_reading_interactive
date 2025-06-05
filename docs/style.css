@@ -128,15 +128,20 @@ p {
 .preview-container-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 1; /* 撐滿右側剩餘空間 */
+
+  /* 移除 flex: 1，避免自動撐滿 */
+  /* flex: 1; */
 }
 .preview-container-wrapper > h2,
 .preview-container-wrapper > p {
   margin-bottom: 8px;
 }
+
 .preview-container {
-  flex: 1; /* 撐滿除標題＋說明以外的所有高度 */
   display: flex;
+
+  /* 固定高度，與左側按鈕區相仿 */
+  height: 350px; /* 可以依需求微調 */
 }
 
 /* PDF 預覽框，裡面只塞 canvas，只顯示第一頁 */
@@ -144,6 +149,10 @@ p {
   flex: 1;
   display: flex;
   flex-direction: column;
+
+  /* 父容器 .preview-container 已設定 height: 350px */
+  height: 100%;
+
   border: 1px solid #dee2e6;
   border-radius: 4px;
   overflow: hidden;        /* 隱藏多餘部分，僅顯示第一頁 */
