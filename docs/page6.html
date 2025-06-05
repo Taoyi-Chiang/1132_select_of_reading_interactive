@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>牡丹亭互動故事（超完整純文字版）</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Noto Serif TC", serif;
+      background: #f3f0ea;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1200px;
+      height: 90vh;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .sidebar {
+      width: 300px;
+      background: #fffefc;
+      padding: 1rem;
+      overflow-y: auto;
+      height: 100%;
+      box-sizing: border-box;
+      border-right: 1px solid #ccc;
+    }
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem;
+      overflow-y: auto;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 2px solid #e0d2b3;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #a21caf;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background: #86198f;
+    }
+    h2 { margin-top: 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main">
+      <div id="dialogue" class="card"></div>
+      <div id="options"></div>
+    </div>
+  </div>
+
+  <script>
+    const characters = {
+      "du-liniang": {
+        name: "杜麗娘",
+        desc: "南安太守之女，溫婉而多情，夢中戀上書生。",
+        quote: "情不知所起，一往而深。"
+      },
+      "liu-mengmei": {
+        name: "柳夢梅",
+        desc: "寒窗書生，懷才不遇，夢中與麗娘結緣。",
+        quote: "夢中得卿，醒來魂繫。"
+      },
+      "maid": {
+        name: "春香",
+        desc: "麗娘貼身丫鬟，機靈伶俐，暗中協助。",
+        quote: "小女子但有所託，小婢必效命。"
+      },
+      "mother": {
+        name: "杜夫人",
+        desc: "麗娘之母，守禮教，關心女兒婚配與門楣。",
+        quote: "女兒當守禮法，莫為情癡擾家門。"
+      },
+      "judge": {
+        name: "判官",
+        desc: "冥府判官，賞善罰惡，亦憐情深者。",
+        quote: "若情能動天，陰陽又何妨？"
+      }
+    };
+
+    const script = {
+      start: {
+        speaker: "du-liniang",
+        text: `
+春深時節，杜麗娘獨自在庭園漫步。花影婆娑，鳥語盈耳，卻覺心頭有一股說不出的悵然。
+忽然，一陣悠遠簫聲自遠處傳來，彷彿在呼喚她的名字。
+`,
+        options: [
+          { text: "循聲探尋", nextId: "garden" },
+          { text: "靜坐冥想", nextId: "dream-begin" }
+        ],
+        characters: ["du-liniang", "maid"]
+      },
+      garden: {
+        speaker: "maid",
+        text: `
+小姐，今日春光明媚，園中百花爭艷。聽說南邊小徑有一株艷紅花盛開，若想去見，請吩咐。
+`,
+        options: [
+          { text: "前往南邊小徑", nextId: "path" },
+          { text: "留在此處欣賞", nextId: "rest-scene" }
+        ],
+        characters: ["du-liniang", "maid"]
+      },
+      path: {
+        speaker: "du-liniang",
+        text: `
+沿著小徑而行，草木掩映，忽聞簫聲響起，聲聲似曾相識。
+她心中一動，速度漸快，直奔聲源所在之地。
+`,
+        options: [
+          { text: "快步前行", nextId: "encounter-hint" },
+          { text: "停步回想", nextId: "dream-begin" }
+        ],
+        characters: ["du-liniang"]
+      },
+      "rest-scene": {
+        speaker: "maid",
+        text: `
+小姐倚樹靜坐，感受微風拂面，心中卻如波濤洶湧。她閉目片刻，竟似見到一書生笑靨盈盈。
+`,
+        options: [
+          { text: "睜眼尋覓", nextId: "encounter" },
+          { text: "合眼回夢", nextId: "dream-begin" }
+        ],
+        characters: ["maid"]
+      },
+      "dream-begin": {
+        speaker: "du-liniang",
+        text: `
+閉上雙眼，眼前忽然變得朦朧。夢境中，她見到一血衣書生，於花下翩然欲舞，目光深沉而柔情。
+`,
+        options: [
+          { text: "夢中走近", nextId: "encounter" },
+          { text: "夢中躲避", nextId: "fade" }
+        ],
+        characters: ["du-liniang"]
+      },
+      "encounter-hint": {
+        speaker: "maid",
+        text: `
+小姐，前方似有一人立於花下，濃眉曲目，神情淡然，或許正是夢中之人。
+`,
+        options: [
+          { text: "走近一觀", nextId: "encounter" },
+          { text: "畏懼退卻", nextId: "fade" }
+        ],
+        characters: ["maid"]
+      },
+      "encounter": {
+        speaker: "liu-mengmei",
+        text: `
+在下夢梅，生於寒門，偶得神夢，夢中見你芳容。如今日見，正是夢中之人，願結此因緣。
+`,
+        options: [
+          { text: "傾心相問", nextId: "soulbond" },
+          { text: "稍加遲疑", nextId: "fade" },
+          { text: "詢問春香", nextId: "ask-maid" }
+        ],
+        characters: ["du-liniang", "liu-mengmei", "maid"]
+      },
+      "ask-maid": {
+        speaker: "maid",
+        text: `
+春香見此人儀表不凡，言辭誠懇，亦知他心誠意切。小姐若信，可一試。
+`,
+        options: [
+          { text: "含笑點頭", nextId: "soulbond" },
+          { text: "不敢輕信", nextId: "fade" }
+        ],
+        characters: ["maid"]
+      },
+      "soulbond": {
+        speaker: "du-liniang",
+        text: `
+麗娘凝望書生，心中早已泛起漣漪。她婉轉答問：「吾名杜麗娘，能與先生共賞此春色乎？」
+`,
+        options: [
+          { text: "共賞春色", nextId: "play-qin" },
+          { text: "不急言說", nextId: "fade" }
+        ],
+        characters: ["du-liniang", "liu-mengmei"]
+      },
+      "play-qin": {
+        speaker: "liu-mengmei",
+        text: `
+夢梅笑道：「若麗娘肯，夢梅今日為君奏一曲《陽關三疊》，盼能表寸心。」
+他撫琴動指，那音律縈繞竹林，似雲外仙音。
+`,
+        options: [
+          { text: "沈醉樂聲", nextId: "music-scene" },
+          { text: "婉拒客氣", nextId: "fade" }
+        ],
+        characters: ["du-liniang", "liu-mengmei"]
+      },
+      "music-scene": {
+        speaker: "du-liniang",
+        text: `
+琴聲如流水，心扉為之一震。麗娘感動道：「此曲妙絕，惟愿與君長相相知。」
+`,
+        options: [
+          { text: "心神契合", nextId: "dream-consent" },
+          { text: "暫避開眼", nextId: "fade" }
+        ],
+        characters: ["du-liniang"]
+      },
+      "dream-consent": {
+        speaker: "du-liniang",
+        text: `
+「既有此緣，願與君同入夢鄉，探尋那夢中的仙境。」
+說罷，她緩步閉眼，似要隨夢梅共赴彼岸。
+`,
+        options: [
+          { text: "緊握雙手", nextId: "death" }
+        ],
+        characters: ["du-liniang", "liu-mengmei"]
+      },
+      "death": {
+        speaker: "maid",
+        text: `
+春香驚語：「小姐戚思太甚，病魔侵體，竟不治而亡，魂魄離體，化作冤魂……」
+`,
+        options: [
+          { text: "幽冥再會", nextId: "judge" }
+        ],
+        characters: ["maid"]
+      },
+      "judge": {
+        speaker: "judge",
+        text: `
+判官徐行而下，道：「此情至真，足動陰陽。今予汝二人再世為人機會，切莫負此良緣。」
+`,
+        options: [
+          { text: "還魂人間", nextId: "reunion" },
+          { text: "寧留彼岸", nextId: "fade" }
+        ],
+        characters: ["judge"]
+      },
+      "reunion": {
+        speaker: "du-liniang",
+        text: `
+麗娘還魂，人間再相見，與夢梅攜手而行，舉案齊眉，共度餘生。
+`,
+        options: [
+          { text: "繼續幸福", nextId: "epilogue" }
+        ],
+        characters: ["du-liniang", "liu-mengmei"]
+      },
+      "epilogue": {
+        speaker: "liu-mengmei",
+        text: `
+《牡丹亭》曲罷人散，人間帝都，麗娘與夢梅舞於花間，百年好合，傳為佳話。此情此景，永存人心。
+`,
+        options: [
+          { text: "重新開始", nextId: "start" }
+        ],
+        characters: ["du-liniang", "liu-mengmei"]
+      },
+      "fade": {
+        speaker: "du-liniang",
+        text: `
+夢醒之時，麗娘淚眼朦朧，恍若身在夢裡。她心中惆悵，只留花影紅塵，獨自歸去。
+`,
+        options: [
+          { text: "重新來過", nextId: "start" }
+        ],
+        characters: ["du-liniang"]
+      }
+    };
+
+    let current = "start";
+
+    function render() {
+      const node = script[current];
+      const speaker = characters[node.speaker];
+
+      document.getElementById("dialogue").innerHTML = `
+        <h2>${speaker.name}</h2>
+        <p>${node.text.replace(/\n/g, '<br>')}</p>
+      `;
+
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+      node.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.innerText = opt.text;
+        btn.onclick = () => { current = opt.nextId; render(); };
+        optionsDiv.appendChild(btn);
+      });
+
+      const sidebar = document.getElementById("sidebar");
+      sidebar.innerHTML = "";
+      node.characters.forEach(cid => {
+        const c = characters[cid];
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <h3>${c.name}</h3>
+          <p>${c.desc}</p>
+          <blockquote>“${c.quote}”</blockquote>
+        `;
+        sidebar.appendChild(div);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

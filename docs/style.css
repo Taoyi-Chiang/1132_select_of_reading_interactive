@@ -108,10 +108,10 @@ p {
 
 /* ========= 右側按鈕區 ========= */
 .right-panel .button-link {
-  background-color: #954A45; /* 新增：右側按鈕顏色 */
+  background-color: #954A45; /* 右側按鈕顏色 */
 }
 .right-panel .button-link:hover {
-  background-color: #6F3637; /* 新增：右側按鈕 hover 顏色 */
+  background-color: #6F3637; /* 右側按鈕 hover 顏色 */
 }
 
 /* ========= 右側 PDF 第一頁預覽區 ========= */
